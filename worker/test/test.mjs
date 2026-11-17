@@ -131,10 +131,32 @@ await t('history is trimmed, merged and must end with the visitor', () => {
   assert.equal(cleanTurns(Array.from({ length: 40 }, (_, i) => ({ role: i % 2 ? 'model' : 'user', text: 't' + i })).concat([{ role: 'user', text: 'end' }])).length <= 16, true);
 });
 
+await t('plan v2: steps with checks, now/later, need, mock, quick; old string steps still work', () => {
+  const a = cleanAnswer({ reply: 'ok', offTopic: false, quick: ['About 6 feet', 'Not sure', 'x'.repeat(90)],
+    plan: { title: 'TV', items: [{ id: 'sp110e', qty: 1, when: 'later' }, { id: 'ws2812b-5v', qty: 99 }], need: ['Painter\'s tape'], mock: 'Tape it out.',
+      steps: [{ do: 'Measure', check: 'Run is under 2 m' }, 'Plain step', { check: 'no do' }] } }, catalog);
+  assert.deepEqual(a.plan.items.map(i => [i.when, i.qty]), [['later', 1], ['now', 20]]);
+  assert.deepEqual(a.plan.steps, [{ do: 'Measure', check: 'Run is under 2 m' }, { do: 'Plain step', check: '' }]);
+  assert.equal(a.plan.need[0], "Painter's tape"); assert.equal(a.plan.mock, 'Tape it out.');
+  assert.equal(a.quick.length, 3); assert.ok(a.quick[2].length <= 40);
+});
+
+await t('prompt stays lean for fast models', () => {
+  assert.ok(systemPrompt(catalog).length < 9000, 'prompt is ' + systemPrompt(catalog).length);
+  assert.ok(systemPrompt(catalog).includes('Rent or own'));
+});
+
 await t('off-topic answers carry no plan', () => {
   const a = cleanAnswer({ reply: 'I only help with lighting.', offTopic: true, plan: { title: 'x', items: [{ id: 'sp110e', qty: 1 }] } }, catalog);
   assert.equal(a.plan, null);
   assert.equal(cleanAnswer({}, catalog).reply.length > 0, true);
+});
+
+await t('the app has the same parts list and planner rules (run scripts/sync-app.sh if not)', async () => {
+  const { existsSync, readFileSync } = await import('node:fs');
+  const site = new URL('../../', import.meta.url), app = new URL('../../../glow-lights/app/src/main/assets/', import.meta.url);
+  if (!existsSync(app)) { console.log('   (app repo not next to this one; skipped)'); return; }
+  for (const f of ['catalog.json', 'planner.json']) assert.equal(readFileSync(new URL(f, app), 'utf8'), readFileSync(new URL(f, site), 'utf8'), f + ' differs');
 });
 
 console.log(`\n${pass} passed`);

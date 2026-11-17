@@ -107,18 +107,22 @@ export function cleanAnswer(raw, catalog) {
   const ids = new Set(catalogIds(catalog));
   const str = (v, n) => (typeof v === 'string' ? v.trim().slice(0, n) : '');
   const list = (v, n, len) => (Array.isArray(v) ? v.map(x => str(x, len)).filter(Boolean).slice(0, n) : []);
-  const a = { reply: str(raw?.reply, 2500), offTopic: raw?.offTopic === true, plan: null, followUps: list(raw?.followUps, 3, 80) };
+  const a = { reply: str(raw?.reply, 2500), offTopic: raw?.offTopic === true, plan: null, quick: list(raw?.quick, 4, 40), followUps: list(raw?.followUps, 3, 80) };
   if (!a.reply) a.reply = 'Sorry, I lost my train of thought. Could you say that again?';
   const p = raw?.plan;
   if (!a.offTopic && p && typeof p === 'object') {
     const items = (Array.isArray(p.items) ? p.items : [])
       .filter(i => i && ids.has(i.id))
-      .map(i => ({ id: i.id, qty: Math.min(20, Math.max(1, parseInt(i.qty, 10) || 1)), why: str(i.why, 200) }))
+      .map(i => ({ id: i.id, qty: Math.min(20, Math.max(1, parseInt(i.qty, 10) || 1)), why: str(i.why, 200), when: i.when === 'later' ? 'later' : 'now' }))
       .slice(0, 12);
+    // steps: {do, check}; older plain-text steps still count
+    const steps = (Array.isArray(p.steps) ? p.steps : []).map(x => typeof x === 'string' ? { do: str(x, 240), check: '' } : { do: str(x?.do, 240), check: str(x?.check, 160) })
+      .filter(x => x.do).slice(0, 12);
     if (items.length) {
-      a.plan = { title: str(p.title, 80) || 'Your setup', items, steps: list(p.steps, 10, 240), zones: list(p.zones, 8, 120), budget: str(p.budget, 120) };
+      a.plan = { title: str(p.title, 80) || 'Your setup', items, need: list(p.need, 8, 80), mock: str(p.mock, 240), steps, zones: list(p.zones, 8, 40), budget: str(p.budget, 120) };
     }
   }
+  if (a.offTopic) a.quick = [];
   return a;
 }
 
@@ -126,7 +130,7 @@ async function askModel(env, deps, catalog, contents) {
   const generationConfig = {
     responseMimeType: 'application/json',
     responseSchema: responseSchema(catalog),
-    maxOutputTokens: 1500
+    maxOutputTokens: 1800
   };
   if (env.THINKING_LEVEL) generationConfig.thinkingConfig = { thinkingLevel: env.THINKING_LEVEL };
   const r = await deps.fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(env.MODEL)}:generateContent`, {

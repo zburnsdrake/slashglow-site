@@ -77,34 +77,45 @@
     return { wrap, any };
   }
 
+  function itemRow(it) {
+    const item = catalog.items.find(c => c.id === it.id);
+    if (!item) return null;
+    const row = el('div', 'item');
+    row.appendChild(el('span', 'qty', `${it.qty}×`));
+    row.appendChild(el('span', 'iname', item.name));
+    row.appendChild(el('span', 'badge ' + item.status, item.status === 'tested' ? 'Tested' : 'Testing'));
+    row.appendChild(el('span', 'iwhy', it.why || item.summary));
+    const { wrap, any } = buyLinks(item);
+    row.appendChild(wrap);
+    return { row, any };
+  }
   function renderPlan(plan, label) {
     const box = el('div', 'plan');
     if (label) box.appendChild(el('p', 'label', label));
     box.appendChild(el('h3', null, plan.title || 'Your setup'));
-    const rows = [];
-    let anyLink = false;
-    for (const it of plan.items) {
-      const item = catalog.items.find(c => c.id === it.id);
-      if (!item) continue;
-      const row = el('div', 'item');
-      row.appendChild(el('span', 'qty', `${it.qty}×`));
-      row.appendChild(el('span', 'iname', item.name));
-      row.appendChild(el('span', 'badge ' + item.status, item.status === 'tested' ? 'Tested' : 'Testing'));
-      row.appendChild(el('span', 'iwhy', it.why || item.summary));
-      const { wrap, any } = buyLinks(item);
-      anyLink = anyLink || any;
-      row.appendChild(wrap);
-      rows.push(row);
-    }
+    const groups = [['now', 'Order now'], ['later', 'Order later']].map(([k, t]) => [t, plan.items.filter(i => (i.when === 'later' ? 'later' : 'now') === k).map(itemRow).filter(Boolean)]);
+    const anyLink = groups.some(([, rows]) => rows.some(r => r.any));
     if (anyLink) box.appendChild(el('p', 'disclose', 'Paid links: /Glow earns a small commission if you buy, at no cost to you. We only list gear /Glow has tested or is testing.'));
-    rows.forEach(r => box.appendChild(r));
+    const split = groups[1][1].length > 0;
+    for (const [title, rows] of groups) {
+      if (!rows.length) continue;
+      if (split) box.appendChild(el('p', 'label sub', title));
+      rows.forEach(r => box.appendChild(r.row));
+    }
+    if (plan.need?.length) {
+      box.appendChild(el('p', 'label sub', 'You’ll also need'));
+      const ul = el('ul'); plan.need.forEach(x => ul.appendChild(el('li', null, x))); box.appendChild(ul);
+    }
+    if (plan.mock) { box.appendChild(el('p', 'label sub', 'Mock it up first')); box.appendChild(el('p', 'mock', plan.mock)); }
     if (plan.steps?.length) {
       box.appendChild(el('p', 'label sub', 'Steps'));
-      const ol = el('ol'); plan.steps.forEach(s => ol.appendChild(el('li', null, s))); box.appendChild(ol);
+      const ol = el('ol');
+      plan.steps.forEach(st => { const li = el('li', null, typeof st === 'string' ? st : st.do); if (st.check) { const c = el('div', 'check', 'Check: ' + st.check); li.appendChild(c); } ol.appendChild(li); });
+      box.appendChild(ol);
     }
     if (plan.zones?.length) {
       box.appendChild(el('p', 'label sub', 'Zones in /Glow'));
-      const ul = el('ul'); plan.zones.forEach(s => ul.appendChild(el('li', null, s))); box.appendChild(ul);
+      const ul = el('ul'); plan.zones.forEach(x => ul.appendChild(el('li', null, x))); box.appendChild(ul);
     }
     if (plan.budget) box.appendChild(el('p', 'budget', `Rough budget (our estimate): ${plan.budget}`));
     log.appendChild(box); scroll();
@@ -180,7 +191,7 @@
         addMsg('bot', a.reply);
         if (a.plan) renderPlan(a.plan);
         turns.push({ role: 'model', text: a.reply + (a.plan ? planMemo(a.plan) : '') });
-        setChips(a.followUps);
+        setChips(a.quick && a.quick.length ? a.quick : a.followUps);
         if (a.remaining === 3) note('3 messages left today. You can keep planning in the /Glow app.');
       } else {
         turns.pop();
@@ -211,17 +222,24 @@
     plan: {
       title: 'Family room media center',
       items: [
-        { id: 'sp630e', qty: 2, why: 'Soffit and under-counter, the two long runs.' },
-        { id: 'sp110e', qty: 1, why: 'TV backlight.' },
-        { id: 'sp620e', qty: 2, why: 'One per speaker, USB powered.' },
-        { id: 'ws2812b-5v', qty: 3, why: 'Soffit, under-counter and TV. Cut to length.' },
-        { id: 'psu-5v-8a', qty: 3, why: 'One per 5V zone.' },
-        { id: 'usb-charger-2a', qty: 1, why: 'Powers the speaker controllers.' },
-        { id: 'alu-channel', qty: 1, why: 'A pack for the soffit and under-counter runs.' },
-        { id: '3pin-l-connector', qty: 1, why: 'A pack for the soffit corners.' },
-        { id: 'jst-pigtail', qty: 1, why: 'A pack to reach each controller.' }
+        { id: 'sp630e', qty: 2, why: 'Soffit and under-counter, the two long runs.', when: 'now' },
+        { id: 'sp110e', qty: 1, why: 'TV backlight.', when: 'now' },
+        { id: 'ws2812b-5v', qty: 3, why: 'Soffit, under-counter and TV. Cut to length.', when: 'now' },
+        { id: 'psu-5v-8a', qty: 3, why: 'One per 5V zone.', when: 'now' },
+        { id: 'alu-channel', qty: 1, why: 'A pack for the soffit and under-counter runs.', when: 'now' },
+        { id: '3pin-l-connector', qty: 1, why: 'A pack for the soffit corners.', when: 'now' },
+        { id: 'jst-pigtail', qty: 1, why: 'A pack to reach each controller.', when: 'now' },
+        { id: 'sp620e', qty: 2, why: 'One per speaker, once the speakers are in place.', when: 'later' },
+        { id: 'usb-charger-2a', qty: 1, why: 'Powers the speaker controllers.', when: 'later' }
       ],
-      steps: ['Measure each run and pick strip lengths.', 'Test every strip on its controller before mounting.', 'Mount strips in the channels and route leads to the outlets.', 'Open /Glow: each controller shows up as a zone; name them and group them.'],
+      need: ['Painter’s tape', 'Small level', 'Cable clips or raceway', 'Isopropyl wipes'],
+      mock: 'Tape the strip runs and cut cardboard speaker footprints before anything ships, so you can wire and mount while you wait.',
+      steps: [
+        { do: 'Measure each run along its real route and add about 20%.', check: 'Every run has a length and its nearest outlet.' },
+        { do: 'Connect each controller in /Glow and light every strip on the floor.', check: 'All zones light and respond before anything is mounted.' },
+        { do: 'Clean the surfaces, then mount the channels and strips.', check: 'No sagging corners; the light reads even through the diffuser.' },
+        { do: 'Name and group the zones in /Glow.', check: 'Music mode moves all five zones together.' }
+      ],
       zones: ['Soffit', 'TV', 'Under-counter', 'Speaker L', 'Speaker R'],
       budget: 'about $200–250 for everything'
     }
