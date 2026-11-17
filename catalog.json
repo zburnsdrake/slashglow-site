@@ -1,0 +1,111 @@
+{
+  "v": 1,
+  "updated": "2026-11-17",
+  "note": "Parts /Glow recommends. status: tested = confirmed working with /Glow on real hardware; testing = expected to work, being confirmed now. The planner may only recommend items from this list. Add an ASIN (amazon) or a store link once the affiliate accounts exist; items without one show 'Link coming soon'.",
+  "items": [
+    {
+      "id": "lbt-tesla-kit",
+      "name": "LightingBugTech Deluxe ambient light kit (Tesla)",
+      "kind": "kit",
+      "places": ["car"],
+      "status": "tested",
+      "controller": "LEDCAR",
+      "summary": "Fiber ambient kit for Tesla Model 3/Y with a Bluetooth controller /Glow drives directly. The kit /Glow was born on.",
+      "amazon": null,
+      "store": null
+    },
+    {
+      "id": "sp630e",
+      "name": "SP630E Bluetooth pixel controller",
+      "kind": "controller",
+      "places": ["room", "tv", "desk", "kitchen", "outdoor"],
+      "status": "testing",
+      "controller": "SP630E",
+      "summary": "Music-capable controller for addressable (pixel) strips like WS2812B. One per zone.",
+      "amazon": null,
+      "store": null
+    },
+    {
+      "id": "sp110e",
+      "name": "SP110E Bluetooth pixel controller",
+      "kind": "controller",
+      "places": ["tv", "desk", "room"],
+      "status": "testing",
+      "controller": "SP110E",
+      "summary": "Small, low-cost controller for one addressable strip, good behind a TV or desk.",
+      "amazon": null,
+      "store": null
+    },
+    {
+      "id": "sp620e",
+      "name": "SP620E USB pixel controller",
+      "kind": "controller",
+      "places": ["speakers", "desk", "shelf"],
+      "status": "testing",
+      "controller": "SP620E",
+      "summary": "USB-powered controller for short strips: speakers, shelves, monitor backs.",
+      "amazon": null,
+      "store": null
+    },
+    {
+      "id": "ws2812b-5v",
+      "name": "WS2812B 5V addressable LED strip",
+      "kind": "strip",
+      "places": ["room", "tv", "desk", "kitchen", "speakers", "shelf"],
+      "status": "testing",
+      "summary": "Individually addressable pixels, so /Glow can run chases and per-pixel looks. Choose the length and density to fit the run.",
+      "amazon": null,
+      "store": null
+    },
+    {
+      "id": "psu-5v-8a",
+      "name": "5V 8A power adapter",
+      "kind": "power",
+      "places": ["room", "tv", "kitchen", "desk"],
+      "status": "testing",
+      "summary": "Power for one 5V pixel zone. Check the strip's rated current and leave headroom.",
+      "amazon": null,
+      "store": null
+    },
+    {
+      "id": "usb-charger-2a",
+      "name": "USB charger, 2A or more",
+      "kind": "power",
+      "places": ["speakers", "desk", "shelf"],
+      "status": "testing",
+      "summary": "Powers USB controllers like the SP620E with short strips.",
+      "amazon": null,
+      "store": null
+    },
+    {
+      "id": "alu-channel",
+      "name": "Aluminum LED channel with diffuser",
+      "kind": "mounting",
+      "places": ["room", "tv", "kitchen", "desk", "shelf"],
+      "status": "testing",
+      "summary": "Hides the dots, spreads the light evenly and helps the strip stay cool.",
+      "amazon": null,
+      "store": null
+    },
+    {
+      "id": "3pin-l-connector",
+      "name": "3-pin L-shaped strip connectors",
+      "kind": "wiring",
+      "places": ["room", "tv", "kitchen", "shelf"],
+      "status": "testing",
+      "summary": "Turns 90-degree corners without soldering.",
+      "amazon": null,
+      "store": null
+    },
+    {
+      "id": "jst-pigtail",
+      "name": "3-pin JST SM pigtails",
+      "kind": "wiring",
+      "places": ["room", "tv", "kitchen", "desk", "speakers", "shelf"],
+      "status": "testing",
+      "summary": "Joins strip sections and extends leads to the controller.",
+      "amazon": null,
+      "store": null
+    }
+  ]
+}

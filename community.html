@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>/Glow community: looks, rigs and scenes</title>
+<meta name="description" content="Share and borrow /Glow looks, rigs and scenes.">
+<meta property="og:title" content="/Glow community: looks, rigs and scenes">
+<meta property="og:description" content="Share and borrow /Glow looks, rigs and scenes.">
+<meta name="theme-color" content="#0b0d12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b0d12}
+a{color:#8ea6ff}a:hover{color:#b8c6ff}
+</style>
+</head>
+<body>
+<div data-dc-root>
+<div style="background: #0b0d12; color: #e9ecf3; font-family: Inter, system-ui, sans-serif; font-size: 17px; line-height: 1.55; min-height: 100vh">
+
+<header style="max-width: 1180px; margin: 0 auto; padding: 22px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="index.html" style="text-decoration: none; display: flex; align-items: baseline; font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 700; font-size: 30px; letter-spacing: -0.5px"><span style="color: #8ea6ff">/</span><span style="color: #f2f4f8">glow</span><span style="margin-left: 10px; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; color: #b7bfd1; letter-spacing: 0">community</span></a>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 22px; font-size: 15px">
+<a href="index.html" style="color: #b7bfd1; text-decoration: none">/Glow</a>
+<a href="cars.html" style="color: #b7bfd1; text-decoration: none">Cars &amp; trucks</a>
+<a href="#share" style="color: #b7bfd1; text-decoration: none">How to share</a>
+<a href="plan.html" style="color: #b7bfd1; text-decoration: none">Plan your setup</a>
+<a href="index.html" style="background: #8ea6ff; color: #0b0d12; text-decoration: none; font-weight: 600; padding: 10px 18px; border-radius: 12px">Get /Glow</a>
+</nav>
+</header>
+
+<section style="max-width: 1180px; margin: 0 auto; padding: 40px 24px 28px">
+<h1 style="margin: 0 0 14px; font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 700; font-size: clamp(36px, 5vw, 56px); line-height: 1.05; letter-spacing: -1.2px; color: #f5f7fb">Looks, rigs and scenes from people who light things.</h1>
+<p style="margin: 0; font-size: 19px; color: #b7bfd1; max-width: 700px">Every share is tagged with the kind of place it was made for. Pick yours, find something you like, and open it in /Glow in two taps.</p>
+</section>
+
+<section aria-label="Filters" style="max-width: 1180px; margin: 0 auto; padding: 0 24px 22px; display: flex; flex-direction: column; gap: 14px">
+<div role="group" aria-label="Location type" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{locs}}" as="l" hint-placeholder-count="10"><button type="button" data-on-click="{{l.pick}}" aria-pressed="{{l.pressed}}" style="font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; min-height: 44px; padding: 9px 16px; border-radius: 999px; border: 1px solid {{l.border}}; background: {{l.bg}}; color: {{l.fg}}; display: inline-flex; align-items: center; gap: 8px">{{l.label}}<span style="font-size: 13px; font-weight: 600; opacity: 0.75">{{l.n}}</span></button></sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<div role="group" aria-label="Kind" style="display: flex; flex-wrap: wrap; gap: 6px; background: #12151c; border: 1px solid #222838; border-radius: 12px; padding: 4px">
+<sc-for list="{{kinds}}" as="k" hint-placeholder-count="4"><button type="button" data-on-click="{{k.pick}}" aria-pressed="{{k.pressed}}" style="font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; min-height: 40px; padding: 8px 14px; border-radius: 9px; border: 0; background: {{k.bg}}; color: {{k.fg}}">{{k.label}}</button></sc-for>
+</div>
+<p style="margin: 0; font-size: 14px; color: #8b93a7">{{countLine}}</p>
+</div>
+</section>
+
+<section style="max-width: 1180px; margin: 0 auto; padding: 0 24px 72px">
+<sc-if value="{{hasItems}}" hint-placeholder-val="{{ true }}">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px">
+<sc-for list="{{shown}}" as="it" hint-placeholder-count="9">
+<div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; height: 56px; border-radius: 12px; background: {{it.bar}}; box-shadow: 0 10px 30px -12px {{it.glow}}"></p>
+<div style="display: flex; align-items: center; gap: 8px">
+<h2 style="margin: 0; font-size: 19px; font-weight: 700; color: #f2f4f8">{{it.name}}</h2>
+<sc-if value="{{it.pro}}" hint-placeholder-val="{{ false }}"><span title="Uses at least one Pro feature" style="font-size: 11px; font-weight: 700; letter-spacing: 0.6px; color: #0b0d12; background: #ffb03a; border-radius: 6px; padding: 2px 6px">PRO</span></sc-if>
+</div>
+<p style="margin: 0; color: #a3abbd; font-size: 15px">{{it.desc}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<span style="font-size: 13px; font-weight: 600; color: #c3cada; background: #1c2130; border: 1px solid #2a3142; border-radius: 8px; padding: 3px 9px">{{it.kind}}</span>
+<span style="font-size: 13px; font-weight: 600; color: #c3cada; background: #1c2130; border: 1px solid #2a3142; border-radius: 8px; padding: 3px 9px">{{it.loc}}</span>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; padding-top: 6px">
+<p style="margin: 0; font-size: 13px; color: #8b93a7">{{it.by}}</p>
+<a href="#open" style="font-size: 14px; font-weight: 600; text-decoration: none; color: #0b0d12; background: #8ea6ff; border-radius: 10px; padding: 9px 14px">Open in /Glow</a>
+</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<div style="background: #12151c; border: 1px dashed #3a4360; border-radius: 20px; padding: 48px 28px; text-align: center">
+<h2 style="margin: 0 0 8px; font-family: 'Space Grotesk', Inter, sans-serif; font-size: 26px; color: #f2f4f8">{{emptyTitle}}</h2>
+<p style="margin: 0 0 20px; color: #a3abbd">Light yours, save the look, and be the first to share one here.</p>
+<a href="#share" style="display: inline-block; text-decoration: none; font-weight: 600; color: #0b0d12; background: #8ea6ff; border-radius: 12px; padding: 13px 20px">How to share</a>
+</div>
+</sc-if>
+</section>
+
+<section id="share" style="background: #10131a; border-top: 1px solid #1d2230; border-bottom: 1px solid #1d2230">
+<div style="max-width: 1180px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap; gap: 40px">
+<div style="flex: 1 1 380px; min-width: 0">
+<h2 style="margin: 0 0 14px; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.6px; color: #f5f7fb">Share yours.</h2>
+<p style="margin: 0 0 16px; color: #b7bfd1">Every look, rig and scene saves as a small file. Tag it with the place it’s for, so the person with the same TV wall or storefront finds it.</p>
+<p style="margin: 0; color: #b7bfd1"><span style="font-size: 11px; font-weight: 700; letter-spacing: 0.6px; color: #0b0d12; background: #ffb03a; border-radius: 6px; padding: 2px 6px">PRO</span> marks a share that uses at least one Pro feature. Sharing and importing are always free, so you can try any of them.</p>
+</div>
+<ol style="flex: 1 1 420px; min-width: 0; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px">
+<li style="background: #151922; border: 1px solid #222838; border-radius: 16px; padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start"><span style="flex: none; width: 32px; height: 32px; border-radius: 50%; background: #8ea6ff; color: #0b0d12; font-weight: 700; display: flex; align-items: center; justify-content: center">1</span><span style="color: #c3cada">In /Glow, open the look, rig or scene and tap <b style="color: #f2f4f8">Share</b>.</span></li>
+<li style="background: #151922; border: 1px solid #222838; border-radius: 16px; padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start"><span style="flex: none; width: 32px; height: 32px; border-radius: 50%; background: #8ea6ff; color: #0b0d12; font-weight: 700; display: flex; align-items: center; justify-content: center">2</span><span style="color: #c3cada">Pick the kind of place it’s for: car or truck, home, entertainment center, holiday, cabinets, display case, man cave or bar, storefront, or restaurant.</span></li>
+<li style="background: #151922; border: 1px solid #222838; border-radius: 16px; padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start"><span style="flex: none; width: 32px; height: 32px; border-radius: 50%; background: #8ea6ff; color: #0b0d12; font-weight: 700; display: flex; align-items: center; justify-content: center">3</span><span style="color: #c3cada">Post it to the gallery or <a href="#" data-link="reddit" hidden>r/[YOUR_SUBREDDIT]</a>. Anyone can open it in Settings in two taps.</span></li>
+</ol>
+</div>
+</section>
+
+<footer>
+<div style="max-width: 1180px; margin: 0 auto; padding: 32px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 14px; color: #8b93a7">
+<p style="margin: 0"><span style="font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 700; color: #e9ecf3"><span style="color: #8ea6ff">/</span>glow</span> · made by ORX Strategy LLC</p>
+<p style="margin: 0">Starter shares are /Glow’s built-in looks, tagged where they work best.</p>
+</div>
+</footer>
+</div>
+</div>
+<script src="assets/site.js"></script>
+<script src="assets/dc-lite.js"></script>
+<script src="assets/community.js"></script>
+</body>
+</html>

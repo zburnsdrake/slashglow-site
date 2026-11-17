@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>/Glow: Light Studio · make dumb light controllers smart</title>
+<meta name="description" content="Make dumb light controllers smart: /Glow adds music sync, Mood and scenes to the Bluetooth LED controllers you already own.">
+<meta property="og:title" content="/Glow: Light Studio · make dumb light controllers smart">
+<meta property="og:description" content="Make dumb light controllers smart: /Glow adds music sync, Mood and scenes to the Bluetooth LED controllers you already own.">
+<meta name="theme-color" content="#0b0d12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0b0d12}
+a{color:#8ea6ff}a:hover{color:#b8c6ff}
+</style>
+</head>
+<body>
+<div data-dc-root>
+<div style="background: #0b0d12; color: #e9ecf3; font-family: Inter, system-ui, sans-serif; font-size: 17px; line-height: 1.55; min-height: 100vh">
+
+<header style="max-width: 1180px; margin: 0 auto; padding: 22px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="#top" style="text-decoration: none; display: flex; align-items: baseline; font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 700; font-size: 30px; letter-spacing: -0.5px"><span style="color: #8ea6ff">/</span><span style="color: #f2f4f8">glow</span></a>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 22px; font-size: 15px">
+<a href="#uses" style="color: #b7bfd1; text-decoration: none">Where it works</a>
+<a href="#music" style="color: #b7bfd1; text-decoration: none">Music</a>
+<a href="#mood" style="color: #b7bfd1; text-decoration: none">Mood</a>
+<a href="#compat" style="color: #b7bfd1; text-decoration: none">Compatibility</a>
+<a href="community.html" style="color: #b7bfd1; text-decoration: none">Community</a>
+<a href="cars.html" style="color: #b7bfd1; text-decoration: none">Cars &amp; trucks</a>
+<a href="plan.html" style="color: #b7bfd1; text-decoration: none">Plan your setup</a>
+<a href="#beta" style="background: #8ea6ff; color: #0b0d12; text-decoration: none; font-weight: 600; padding: 10px 18px; border-radius: 12px">Join the beta</a>
+</nav>
+</header>
+
+<section id="top" style="max-width: 1180px; margin: 0 auto; padding: 56px 24px 72px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
+<div style="flex: 1 1 440px; min-width: 0">
+<p style="margin: 0 0 18px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: #b7bfd1; border: 1px solid #2a3142; border-radius: 999px; padding: 6px 14px">Android beta · iPhone coming soon</p>
+<h1 style="margin: 0 0 20px; font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 700; font-size: clamp(40px, 6vw, 68px); line-height: 1.04; letter-spacing: -1.5px; color: #f5f7fb">Make dumb light controllers smart.</h1>
+<p style="margin: 0 0 30px; font-size: 20px; color: #b7bfd1; max-width: 580px">That little Bluetooth box behind your LED strips, light bars and holiday lights can do far more than its app lets it. /Glow takes it over and turns it into lighting that moves with your music and your movies, designed by you, room by room.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="#beta" style="background: #8ea6ff; color: #0b0d12; text-decoration: none; font-weight: 600; font-size: 17px; padding: 15px 24px; border-radius: 14px">Join the Android beta</a>
+<a href="#uses" style="color: #e9ecf3; text-decoration: none; font-weight: 500; font-size: 17px; padding: 15px 24px; border-radius: 14px; border: 1px solid #2a3142; background: #151922">See where it works</a>
+</div>
+<p style="margin: 22px 0 0; font-size: 17px; font-style: italic; color: #c9d2ff">Setup takes two minutes. Playing with it takes the rest of the evening.</p>
+<p style="margin: 10px 0 0; font-size: 14px; color: #8b93a7">Free to download. Beta testers get Pro and /Glow AI at half price, for life. No account, no new hardware.</p>
+</div>
+<div style="flex: 1 1 460px; min-width: 0; display: flex; justify-content: center; align-items: flex-end; gap: 16px">
+<img src="assets/img/patterns.png" alt="/Glow pattern list with Flame Top playing" style="width: 31%; max-width: 200px; border-radius: 26px; border: 1px solid #2a3142; box-shadow: 0 24px 60px rgba(0,0,0,.55); margin-bottom: 36px">
+<img src="assets/img/lights.png" alt="/Glow Lights screen with brightness per zone and a color picker" style="width: 36%; max-width: 236px; border-radius: 28px; border: 1px solid #3a4360; box-shadow: 0 30px 80px rgba(80,110,255,.28)">
+<img src="assets/img/music.png" alt="/Glow music pedalboard with the Funk rig" style="width: 31%; max-width: 200px; border-radius: 26px; border: 1px solid #2a3142; box-shadow: 0 24px 60px rgba(0,0,0,.55); margin-bottom: 36px">
+</div>
+</section>
+
+<section id="uses" style="background: #10131a; border-top: 1px solid #1d2230; border-bottom: 1px solid #1d2230">
+<div style="max-width: 1180px; margin: 0 auto; padding: 80px 24px">
+<p style="margin: 0 0 10px; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #8ea6ff">Where it works</p>
+<h2 style="margin: 0 0 14px; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(30px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.8px; color: #f5f7fb; max-width: 760px">Anywhere there’s a strip and a controller.</h2>
+<p style="margin: 0 0 36px; color: #b7bfd1; max-width: 720px">Each place gets its own location in /Glow, with its own zones and looks. Switch at the top of the app; /Glow connects only to the lights you’re using.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px">
+<div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 22px">
+<p style="margin: 0 0 14px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #ffb060, #ff7a3d, #c890ff)"></p>
+<h3 style="margin: 0 0 6px; font-size: 19px; color: #f2f4f8">Home &amp; living room</h3>
+<p style="margin: 0; color: #a3abbd; font-size: 16px">Cove and backlight strips that drift warm in the evening and settle into a night look on their own.</p>
+</div>
+<div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 22px">
+<p style="margin: 0 0 14px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #0040ff, #00e5ff, #8000ff)"></p>
+<h3 style="margin: 0 0 6px; font-size: 19px; color: #f2f4f8">Entertainment center</h3>
+<p style="margin: 0; color: #a3abbd; font-size: 16px">TV backlight, speaker uplights and soffit as separate zones: calm behind the screen, the speakers on the beat.</p>
+</div>
+<div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 22px">
+<p style="margin: 0 0 14px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #ff1a2e, #ffffff, #10c060, #ff1a2e)"></p>
+<h3 style="margin: 0 0 6px; font-size: 19px; color: #f2f4f8">Holiday lights</h3>
+<p style="margin: 0; color: #a3abbd; font-size: 16px">Pixel strings on the house or tree that chase, twinkle and dance to the playlist, not the same eight built-in modes every year.</p>
+</div>
+<div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 22px">
+<p style="margin: 0 0 14px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #ffe0b0, #fff4e0, #ffd090)"></p>
+<h3 style="margin: 0 0 6px; font-size: 19px; color: #f2f4f8">Cabinets &amp; shelves</h3>
+<p style="margin: 0; color: #a3abbd; font-size: 16px">Under-counter and shelf lighting with calibrated whites, so every run matches instead of three shades of blue-ish.</p>
+</div>
+<div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 22px">
+<p style="margin: 0 0 14px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #c890ff, #e6fbff, #c890ff)"></p>
+<h3 style="margin: 0 0 6px; font-size: 19px; color: #f2f4f8">Display cases</h3>
+<p style="margin: 0; color: #a3abbd; font-size: 16px">Collections, guitars, sneakers, models: a slow breathe or a single held color that shows them off.</p>
+</div>
+<div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 22px">
+<p style="margin: 0 0 14px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #ff0080, #ffee00, #00e5ff)"></p>
+<h3 style="margin: 0 0 6px; font-size: 19px; color: #f2f4f8">Man cave &amp; game room</h3>
+<p style="margin: 0; color: #a3abbd; font-size: 16px">Game-night colors, a rig for the band practice, and a welcome scene when the lights power up.</p>
+</div>
+<div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 22px">
+<p style="margin: 0 0 14px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #ff5a14, #ffb03a, #ff5a14)"></p>
+<h3 style="margin: 0 0 6px; font-size: 19px; color: #f2f4f8">Home bar</h3>
+<p style="margin: 0; color: #a3abbd; font-size: 16px">Back-bar and shelf glow that lifts when the music does and dims down for last call.</p>
+</div>
+<div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 22px">
+<p style="margin: 0 0 14px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #00d0a0, #5ad1ff, #00d0a0)"></p>
+<h3 style="margin: 0 0 6px; font-size: 19px; color: #f2f4f8">Storefront windows</h3>
+<p style="margin: 0; color: #a3abbd; font-size: 16px">A window that moves catches the eye from across the street. Set a look for the day and one for after close.</p>
+</div>
+<div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 22px">
+<p style="margin: 0 0 14px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #ffb060, #ff6a3d, #8a2be2)"></p>
+<h3 style="margin: 0 0 6px; font-size: 19px; color: #f2f4f8">Restaurants &amp; bars</h3>
+<p style="margin: 0; color: #a3abbd; font-size: 16px">Bright and clean for lunch, warm and low for dinner, alive for the late crowd, from one phone behind the counter.</p>
+</div>
+<a href="cars.html" style="text-decoration: none; background: #1a2033; border: 1px solid #3a4360; border-radius: 18px; padding: 22px; display: flex; flex-direction: column">
+<p style="margin: 0 0 14px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #c890ff, #5a10ff, #60f0ff)"></p>
+<span style="margin: 0 0 6px; font-size: 19px; font-weight: 700; color: #f2f4f8">Cars &amp; trucks</span>
+<span style="color: #a3abbd; font-size: 16px">Where /Glow started: interior kits, footwells and underglow, with a welcome as you get in.</span>
+<span style="margin-top: 12px; color: #8ea6ff; font-weight: 600; font-size: 15px">/Glow for cars &amp; trucks →</span>
+</a>
+</div>
+</div>
+</section>
+
+<section style="max-width: 1180px; margin: 0 auto; padding: 88px 24px">
+<p style="margin: 0 0 10px; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #8ea6ff">Dumb to smart</p>
+<h2 style="margin: 0 0 36px; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(30px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.8px; color: #f5f7fb; max-width: 760px">Same controller. A completely different light.</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 18px">
+<div style="flex: 1 1 320px; min-width: 0; background: #12151c; border: 1px solid #222838; border-radius: 20px; padding: 28px">
+<h3 style="margin: 0 0 14px; font-size: 19px; color: #8b93a7">The app it came with</h3>
+<ul style="margin: 0; padding-left: 20px; color: #8b93a7; display: flex; flex-direction: column; gap: 10px">
+<li>A fixed list of built-in modes</li>
+<li>Colors that don’t match what you picked</li>
+<li>One controller at a time, each on its own</li>
+<li>A music mode that mostly flickers</li>
+</ul>
+</div>
+<div style="flex: 1 1 320px; min-width: 0; background: #151922; border: 1px solid #3a4360; border-radius: 20px; padding: 28px">
+<h3 style="margin: 0 0 14px; font-size: 19px; color: #f2f4f8">With /Glow</h3>
+<ul style="margin: 0; padding-left: 20px; color: #c3cada; display: flex; flex-direction: column; gap: 10px">
+<li>Looks you build, or describe in plain words</li>
+<li>Calibrated color and brightness for every zone</li>
+<li>Every controller in a room moving as one, or each doing its own thing</li>
+<li>A pedalboard that turns music into light</li>
+</ul>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; margin-top: 18px">
+<div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 24px">
+<svg aria-hidden="true" viewBox="0 0 24 24" style="width: 28px; height: 28px; fill: none; stroke: #8ea6ff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M3 12c2-6 4-6 6 0s4 6 6 0 4-6 6 0"></path></svg>
+<h3 style="margin: 14px 0 8px; font-size: 19px; color: #f2f4f8">Patterns you can shape</h3>
+<p style="margin: 0; color: #a3abbd">Breathe, fade, bursts, heartbeat, or your own with LFO modulators. Give each zone its own effect and speed.</p>
+</div>
+<div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 24px">
+<svg aria-hidden="true" viewBox="0 0 24 24" style="width: 28px; height: 28px; fill: none; stroke: #8ea6ff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M4 6h16M4 12h10M4 18h6"></path></svg>
+<h3 style="margin: 14px 0 8px; font-size: 19px; color: #f2f4f8">Help that knows your setup</h3>
+<p style="margin: 0; color: #a3abbd">Ask why a zone looks off and it reads your actual settings. Add your own AI key and it designs looks, rigs and scenes for you.</p>
+</div>
+<div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 24px">
+<svg aria-hidden="true" viewBox="0 0 24 24" style="width: 28px; height: 28px; fill: none; stroke: #8ea6ff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z"></path></svg>
+<h3 style="margin: 14px 0 8px; font-size: 19px; color: #f2f4f8">Day → Night</h3>
+<p style="margin: 0; color: #a3abbd">Your day look blends into a calmer night look every evening, and back in the morning.</p>
+</div>
+<div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 24px">
+<svg aria-hidden="true" viewBox="0 0 24 24" style="width: 28px; height: 28px; fill: none; stroke: #8ea6ff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><circle cx="12" cy="12" r="9"></circle><path d="M12 3a9 9 0 000 18z"></path></svg>
+<h3 style="margin: 14px 0 8px; font-size: 19px; color: #f2f4f8">Light check</h3>
+<p style="margin: 0; color: #a3abbd">A one-minute check finds each strip’s dimmest visible level and the colors it can’t show, then works around them.</p>
+</div>
+<div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 24px">
+<svg aria-hidden="true" viewBox="0 0 24 24" style="width: 28px; height: 28px; fill: none; stroke: #8ea6ff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z"></path></svg>
+<h3 style="margin: 14px 0 8px; font-size: 19px; color: #f2f4f8">Gentle mode</h3>
+<p style="margin: 0; color: #a3abbd">Caps brightness and slows every change so nothing strobes. Turn it on after sundown, or all the time for anyone sensitive to flashing light.</p>
+</div>
+</div>
+</section>
+
+<section id="music" style="background: #10131a; border-top: 1px solid #1d2230; border-bottom: 1px solid #1d2230">
+<div style="max-width: 1180px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
+<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 22px; background: radial-gradient(circle at 50% 38%, #1a2140 0%, #0b0d12 70%); border: 1px solid #1d2230; border-radius: 28px; padding: 36px 24px 28px">
+<svg role="img" aria-label="/Glow’s mirror ball, spinning faster as the music gets louder" viewBox="0 0 24 24" style="width: 220px; height: 220px; fill: none; stroke: {{ballColor}}; stroke-width: 1.15; stroke-linecap: round; filter: drop-shadow(0 0 {{glow}}px {{ballColor}}); overflow: visible">
+<path d="M12 2.6v2.4"></path>
+<circle cx="12" cy="13" r="8"></circle>
+<path d="M4.6 10h14.8M4.2 13h15.6M4.6 16h14.8"></path>
+<sc-for list="{{meridians}}" as="m" hint-placeholder-count="4"><path data-dc-d="{{m.d}}" data-dc-opacity="{{m.op}}"></path></sc-for>
+<path d="M20.5 2.5v3M19 4h3" stroke="#ffffff" stroke-width="1.4" data-dc-opacity="{{sparkOp}}" data-dc-transform="{{sparkT}}"></path>
+</svg>
+<div aria-hidden="true" style="width: 100%; max-width: 360px; display: flex; gap: 6px">
+<sc-for list="{{strip}}" as="cell" hint-placeholder-count="12"><div style="flex: 1; height: 10px; border-radius: 5px; background: {{cell.c}}; box-shadow: 0 0 {{cell.g}}px {{cell.c}}"></div></sc-for>
+</div>
+<button type="button" data-on-click="{{toggle}}" style="font: inherit; font-weight: 600; cursor: pointer; background: {{btnBg}}; color: {{btnFg}}; border: 1px solid #3a4360; border-radius: 999px; padding: 12px 22px; display: inline-flex; align-items: center; gap: 8px">{{btnLabel}}</button>
+<p style="margin: 0; font-size: 13px; color: #8b93a7; text-align: center">{{caption}}</p>
+</div>
+<div style="flex: 1 1 480px; min-width: 0">
+<p style="margin: 0 0 10px; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #8ea6ff">Music mode</p>
+<h2 style="margin: 0 0 18px; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(30px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.8px; color: #f5f7fb">Music you can see.</h2>
+<p style="margin: 0 0 22px; color: #b7bfd1; font-size: 19px">/Glow listens through your phone and runs the music through effects pedals, like a guitar rig for your lights. Stomp a footswitch, turn a knob, save the board as a rig. Every look you make is yours, so no two rooms glow the same.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px 24px; margin-bottom: 22px">
+<p style="margin: 0; color: #a3abbd"><b style="color: #e9ecf3">Comp + gate</b> caps the peaks, darkens the gaps</p>
+<p style="margin: 0; color: #a3abbd"><b style="color: #e9ecf3">Drive &amp; Fuzz</b> make hits slam and sputter</p>
+<p style="margin: 0; color: #a3abbd"><b style="color: #e9ecf3">Envelope</b> sweeps color like an auto-wah</p>
+<p style="margin: 0; color: #a3abbd"><b style="color: #e9ecf3">Mod</b> chorus, flanger, phaser, rotary</p>
+<p style="margin: 0; color: #a3abbd"><b style="color: #e9ecf3">Echo &amp; Verb</b> leave glowing trails</p>
+<p style="margin: 0; color: #a3abbd"><b style="color: #e9ecf3">A rig on one zone</b> while the others keep their look</p>
+</div>
+<p style="margin: 0; font-size: 15px; color: #8b93a7">Uses the phone’s own mic. Audio is analyzed on the phone and never leaves it.</p>
+</div>
+</div>
+</section>
+
+<section id="mood" style="max-width: 1180px; margin: 0 auto; padding: 88px 24px">
+<p style="margin: 0 0 10px; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #8ea6ff">Mood mode</p>
+<h2 style="margin: 0 0 14px; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(30px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.8px; color: #f5f7fb; max-width: 760px">Hold the power button. The room follows along.</h2>
+<p style="margin: 0 0 32px; color: #b7bfd1; max-width: 720px">Mood listens to what’s playing and changes your lights for you. No timeline to program, nothing to sync: pause, skip, shuffle, start late, it keeps up. Start it from the /Glow tile in your phone’s pull-down shade, no app needed.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 18px">
+<div style="flex: 1 1 340px; min-width: 0; background: #151922; border: 1px solid #222838; border-radius: 20px; padding: 28px">
+<p style="margin: 0 0 16px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #9070ff, #00c8d0, #ff7a20, #ff0080)"></p>
+<h3 style="margin: 0 0 10px; font-size: 22px; color: #f2f4f8">Music mood</h3>
+<p style="margin: 0 0 12px; color: #a3abbd">Put a playlist on shuffle. When the next song starts, /Glow listens for a few seconds and moves to the look from your rotation that fits it: calm looks for slow songs, big ones for the bangers, deeper colors for darker tracks.</p>
+<p style="margin: 0; font-size: 15px; color: #8b93a7">/Glow locks onto the kick drum and shows the tempo; Half time calms the fast songs. Pick the looks in the rotation, or let it use them all.</p>
+</div>
+<div style="flex: 1 1 340px; min-width: 0; background: #151922; border: 1px solid #222838; border-radius: 20px; padding: 28px">
+<p style="margin: 0 0 16px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #003a40, #0a2a80, #ffffff, #400008)"></p>
+<h3 style="margin: 0 0 10px; font-size: 22px; color: #f2f4f8">Movie mode</h3>
+<p style="margin: 0 0 12px; color: #a3abbd">The soundtrack drives the room: dark and still in the quiet stretches, calm through dialogue, big when the score swells, and a flash on every jump scare. Low thuds can stutter the lights, footstep by footstep.</p>
+<p style="margin: 0; font-size: 15px; color: #8b93a7">Type a movie title and the AI designs its moods from that film’s world.</p>
+</div>
+</div>
+</section>
+
+<section style="background: #10131a; border-top: 1px solid #1d2230; border-bottom: 1px solid #1d2230">
+<div style="max-width: 1180px; margin: 0 auto; padding: 80px 24px">
+<h2 style="margin: 0 0 36px; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(30px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.8px; color: #f5f7fb">Set up in three steps.</h2>
+<ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px">
+<li style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 26px">
+<p style="margin: 0 0 12px; width: 40px; height: 40px; border-radius: 50%; background: #8ea6ff; color: #0b0d12; font-weight: 700; display: flex; align-items: center; justify-content: center">1</p>
+<h3 style="margin: 0 0 8px; font-size: 19px; color: #f2f4f8">Close the old app</h3>
+<p style="margin: 0; color: #a3abbd">Light controllers accept one app at a time. Force-stop the one that came with your lights.</p>
+</li>
+<li style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 26px">
+<p style="margin: 0 0 12px; width: 40px; height: 40px; border-radius: 50%; background: #8ea6ff; color: #0b0d12; font-weight: 700; display: flex; align-items: center; justify-content: center">2</p>
+<h3 style="margin: 0 0 8px; font-size: 19px; color: #f2f4f8">Connect in /Glow</h3>
+<p style="margin: 0; color: #a3abbd">Power the lights, stand nearby and tap Connect. Tell /Glow where they are, and it sets up a zone for each controller.</p>
+</li>
+<li style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 26px">
+<p style="margin: 0 0 12px; width: 40px; height: 40px; border-radius: 50%; background: #8ea6ff; color: #0b0d12; font-weight: 700; display: flex; align-items: center; justify-content: center">3</p>
+<h3 style="margin: 0 0 8px; font-size: 19px; color: #f2f4f8">Pick a look</h3>
+<p style="margin: 0; color: #a3abbd">Start with a built-in look, grab one from the community, or describe what you want and let the AI build it.</p>
+</li>
+</ol>
+</div>
+</section>
+
+<section id="compat">
+<div style="max-width: 1180px; margin: 0 auto; padding: 80px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 420px; min-width: 0">
+<h2 style="margin: 0 0 16px; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.6px; color: #f5f7fb">Will it work with my lights?</h2>
+<p style="margin: 0 0 14px; color: #b7bfd1">/Glow works with the inexpensive Bluetooth controllers sold with many LED strips, pixel lights and light kits. If your controller’s name starts like one of these, /Glow can most likely drive it:</p>
+<p style="margin: 0 0 14px; display: flex; flex-wrap: wrap; gap: 8px">
+<span style="font-family: ui-monospace, monospace; font-size: 15px; background: #151922; border: 1px solid #2a3142; border-radius: 10px; padding: 6px 12px">ELK-BLEDOM</span>
+<span style="font-family: ui-monospace, monospace; font-size: 15px; background: #151922; border: 1px solid #2a3142; border-radius: 10px; padding: 6px 12px">LEDBLE</span>
+<span style="font-family: ui-monospace, monospace; font-size: 15px; background: #151922; border: 1px solid #2a3142; border-radius: 10px; padding: 6px 12px">LEDDMX</span>
+<span style="font-family: ui-monospace, monospace; font-size: 15px; background: #151922; border: 1px solid #2a3142; border-radius: 10px; padding: 6px 12px">LEDCAR</span>
+<span style="font-family: ui-monospace, monospace; font-size: 15px; background: #151922; border: 1px solid #2a3142; border-radius: 10px; padding: 6px 12px">SP110E</span>
+<span style="font-family: ui-monospace, monospace; font-size: 15px; background: #151922; border: 1px solid #2a3142; border-radius: 10px; padding: 6px 12px">SP611E – SP621E</span>
+<span style="font-family: ui-monospace, monospace; font-size: 15px; background: #151922; border: 1px solid #2a3142; border-radius: 10px; padding: 6px 12px">SP630E – SP64xE</span>
+</p>
+<p style="margin: 0; font-size: 15px; color: #8b93a7">Mix brands in one room: each controller becomes a zone. Not sure about yours? Join the beta and tell us the name. Testing new controllers is what the beta is for.</p>
+</div>
+<div style="flex: 1 1 360px; min-width: 0; background: #151922; border: 1px solid #222838; border-radius: 20px; padding: 28px">
+<h3 style="margin: 0 0 12px; font-size: 20px; color: #f2f4f8">Private by design</h3>
+<ul style="margin: 0; padding-left: 20px; color: #a3abbd; display: flex; flex-direction: column; gap: 8px">
+<li>No account, no tracking, no cloud.</li>
+<li>Talks to your lights over Bluetooth, straight from the phone.</li>
+<li>Music is analyzed on the phone and never recorded or sent.</li>
+<li>An optional AI key stays encrypted on your phone and only goes to the provider you chose.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section style="background: #10131a; border-top: 1px solid #1d2230; border-bottom: 1px solid #1d2230">
+<div style="max-width: 1180px; margin: 0 auto; padding: 80px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 36px">
+<div style="flex: 1 1 520px; min-width: 0">
+<p style="margin: 0 0 10px; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #8ea6ff">Plan with /Glow</p>
+<h2 style="margin: 0 0 16px; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.6px; color: #f5f7fb">Not sure where to start? Show us your space.</h2>
+<p style="margin: 0; color: #b7bfd1">Describe the room to the /Glow planner. It suggests where the lights go, which controllers and strips to get, and how to power them, using only gear /Glow has tested. In the app you can show it a photo, and it sets up your zones before the box even arrives.</p>
+<p style="margin: 18px 0 0"><a href="plan.html" style="display: inline-block; background: #8ea6ff; color: #0b0d12; text-decoration: none; font-weight: 600; padding: 13px 20px; border-radius: 12px">Plan your setup</a></p>
+</div>
+<ol style="flex: 1 1 340px; min-width: 0; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px">
+<li style="background: #151922; border: 1px solid #222838; border-radius: 14px; padding: 14px 18px; color: #c3cada"><b style="color: #f2f4f8">1.</b> Show the room</li>
+<li style="background: #151922; border: 1px solid #222838; border-radius: 14px; padding: 14px 18px; color: #c3cada"><b style="color: #f2f4f8">2.</b> Get a plan and a parts list</li>
+<li style="background: #151922; border: 1px solid #222838; border-radius: 14px; padding: 14px 18px; color: #c3cada"><b style="color: #f2f4f8">3.</b> Install, open /Glow, it’s ready</li>
+</ol>
+</div>
+</section>
+
+<section style="max-width: 1180px; margin: 0 auto; padding: 80px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 28px">
+<div style="flex: 1 1 520px; min-width: 0">
+<p style="margin: 0 0 10px; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #8ea6ff">Community</p>
+<h2 style="margin: 0 0 16px; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.6px; color: #f5f7fb">Borrow a look from someone’s bar, window or tree.</h2>
+<p style="margin: 0; color: #b7bfd1">Every look, rig and scene in /Glow saves as a small file. Browse what people share, filtered by the kind of place they light, and open one in two taps.</p>
+</div>
+<a href="community.html" style="background: #8ea6ff; color: #0b0d12; text-decoration: none; font-weight: 600; padding: 15px 24px; border-radius: 14px">Browse the community</a>
+</section>
+
+<section id="faq" style="background: #10131a; border-top: 1px solid #1d2230; border-bottom: 1px solid #1d2230">
+<div style="max-width: 860px; margin: 0 auto; padding: 80px 24px">
+<h2 style="margin: 0 0 28px; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.6px; color: #f5f7fb">Questions</h2>
+<div style="display: flex; flex-direction: column; gap: 22px">
+<div><h3 style="margin: 0 0 6px; font-size: 18px; color: #f2f4f8">Do I need new hardware, rewiring or flashing?</h3><p style="margin: 0; color: #a3abbd">No. /Glow talks to the controller you already have, the same way its original app does.</p></div>
+<div><h3 style="margin: 0 0 6px; font-size: 18px; color: #f2f4f8">Can I run several rooms or places?</h3><p style="margin: 0; color: #a3abbd">Yes. Each place is a location with its own controllers, zones and looks: your car, the TV wall, the holiday lights. /Glow connects to one location at a time.</p></div>
+<div><h3 style="margin: 0 0 6px; font-size: 18px; color: #f2f4f8">Does it work with Google Home or Apple Home?</h3><p style="margin: 0; color: #a3abbd">Not yet. /Glow runs on your phone and talks to the lights directly. Smart-home support is on the roadmap.</p></div>
+<div><h3 style="margin: 0 0 6px; font-size: 18px; color: #f2f4f8">Is it safe for people sensitive to flashing lights?</h3><p style="margin: 0; color: #a3abbd">Turn on Always gentle in Settings. It caps brightness and slows every change so no look, scene or movie scare can strobe. Effects running inside a controller itself can only be dimmed, so stick to /Glow’s own looks.</p></div>
+<div><h3 style="margin: 0 0 6px; font-size: 18px; color: #f2f4f8">Can I use it in my shop or restaurant?</h3><p style="margin: 0; color: #a3abbd">Yes. A spare Android phone near the controllers can run your lights all day, with a day look and an after-hours look.</p></div>
+<div><h3 style="margin: 0 0 6px; font-size: 18px; color: #f2f4f8">What does it cost?</h3><p style="margin: 0; color: #a3abbd">The core app is free. Pro is a one-time $9.99 unlock for extras like Day → Night, music-reactive patterns, rigs on a zone and full pedal chains, and it works with your own AI key. No key? /Glow AI is a $9.99/year add-on with no setup. Beta testers get both at 50% off, for life.</p></div>
+<div><h3 style="margin: 0 0 6px; font-size: 18px; color: #f2f4f8">Is there an iPhone version?</h3><p style="margin: 0; color: #a3abbd">It’s next, once the Android version is solid. Join the iPhone list below and we’ll tell you when it’s ready.</p></div>
+</div>
+</div>
+</section>
+
+<section id="beta" style="max-width: 1180px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; gap: 22px">
+<div style="flex: 1 1 420px; min-width: 0; background: linear-gradient(160deg, #1b2236, #151922); border: 1px solid #2f3a5a; border-radius: 22px; padding: 32px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: 32px; letter-spacing: -0.5px; color: #f5f7fb">Join the Android beta</h2>
+<p style="margin: 0; color: #b7bfd1">Use the Google account on your Android phone. You’ll get an invite to test /Glow from Google Play.</p>
+<a data-form="beta" href="#" style="font: inherit; font-weight: 600; cursor: pointer; text-align: center; text-decoration: none; margin-top: 6px; background: #8ea6ff; color: #0b0d12; border: 0; border-radius: 12px; padding: 15px 20px">Request an invite</a>
+</div>
+<div id="iphone" style="flex: 1 1 340px; min-width: 0; background: #151922; border: 1px solid #222838; border-radius: 22px; padding: 32px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: 28px; letter-spacing: -0.4px; color: #f5f7fb">iPhone: coming soon</h2>
+<p style="margin: 0; color: #b7bfd1">Leave your email and we’ll let you know when /Glow for iPhone is ready to test.</p>
+<a data-form="iphone" href="#" style="font: inherit; font-weight: 600; cursor: pointer; text-align: center; text-decoration: none; margin-top: 6px; background: transparent; color: #e9ecf3; border: 1px solid #3a4360; border-radius: 12px; padding: 15px 20px">Notify me</a>
+</div>
+</section>
+
+<footer style="border-top: 1px solid #1d2230">
+<div style="max-width: 1180px; margin: 0 auto; padding: 32px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 14px; color: #8b93a7">
+<p style="margin: 0"><span style="font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 700; color: #e9ecf3"><span style="color: #8ea6ff">/</span>glow</span> · made by ORX Strategy LLC</p>
+<p style="margin: 0"><a href="cars.html" style="color: #8b93a7">Cars &amp; trucks</a> · <a href="community.html" style="color: #8b93a7">Community</a> · <a href="plan.html" style="color: #8b93a7">Plan your setup</a> · <a href="privacy.html" style="color: #8b93a7">Privacy</a> · /Glow is independent and not affiliated with any light or controller brand.</p>
+</div>
+</footer>
+</div>
+</div>
+<script src="assets/site.js"></script>
+<script src="assets/dc-lite.js"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>
