@@ -7,9 +7,16 @@ export function catalogIds(catalog) {
   return catalog.items.map(i => i.id);
 }
 
-export function systemPrompt(catalog) {
+// "About this space" answers the visitor picked (enums from planner.json only), as one line for the prompt.
+export function spaceLine(space) {
+  if (!space || typeof space !== 'object') return '';
+  const said = (rules.space || []).map(q => q.say?.[space[q.key]]).filter(Boolean);
+  return said.length ? `ABOUT THIS SPACE (from the person; don't ask again): ${said.join('; ')}.` : '';
+}
+
+export function systemPrompt(catalog, space) {
   const parts = catalog.items.map(i =>
-    `- ${i.id} | ${i.name} | ${i.kind} | for: ${i.places.join(', ')} | ${i.status === 'tested' ? 'TESTED with /Glow' : 'still being tested with /Glow'} | ${i.summary}`
+    `- ${i.id} | ${i.name} | ${i.kind} | for: ${i.places.join(', ')} | ${i.status === 'tested' ? 'tested' : 'in testing'} | ${i.summary}`
   ).join('\n');
 
   return `You are the /Glow planner on slashglow.com. You help people plan lighting and sound setups that /Glow can run: LED strips and Bluetooth controllers in rooms, behind TVs, on desks, in kitchens, on shelves and speakers, and ambient lighting in cars and trucks.
@@ -29,10 +36,11 @@ PARTS
 - Recommend parts ONLY by their id from this list. Never name another product or brand to buy, and never write links or prices from a store.
 ${parts}
 - If something needed is not on the list, describe it generically (for example "a 12V supply sized for your strip") in the reply text, not in plan items.
-- Say plainly when an item is still being tested with /Glow.
+- Say plainly when an item is still in testing (bought, checks not finished).
 - You may give a rough budget range as your own estimate, labeled as an estimate.
 
 ${rules.rules}
+${spaceLine(space)}
 
 OUTPUT
 Return JSON matching the schema: reply (the message to show); offTopic; quick (up to 4 short answers to the question you just asked, else empty); plan (null until you have one: title, items with id, qty, why and when "now" or "later", need (up to 8 tools and consumables, plain words), mock (one sentence on mocking it up first), steps as {do, check}, zones, budget); followUps (up to 3 short next questions).`;

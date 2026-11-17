@@ -16,7 +16,8 @@
     'Speakers and shelves that glow to music'
   ];
 
-  let catalog = null, session = null, busy = false;
+  let catalog = null, rules = null, session = null, busy = false;
+  const space = {}; // About this space: chosen in the page, kept in memory only
   const turns = []; // [{role:'user'|'model', text}]
 
   // ---------- rendering (text only, no HTML from the network) ----------
@@ -83,7 +84,7 @@
     const row = el('div', 'item');
     row.appendChild(el('span', 'qty', `${it.qty}×`));
     row.appendChild(el('span', 'iname', item.name));
-    row.appendChild(el('span', 'badge ' + item.status, item.status === 'tested' ? 'Tested' : 'Testing'));
+    row.appendChild(el('span', 'badge ' + item.status, item.status === 'tested' ? 'Tested' : 'In testing'));
     row.appendChild(el('span', 'iwhy', it.why || item.summary));
     const { wrap, any } = buyLinks(item);
     row.appendChild(wrap);
@@ -118,7 +119,58 @@
       const ul = el('ul'); plan.zones.forEach(x => ul.appendChild(el('li', null, x))); box.appendChild(ul);
     }
     if (plan.budget) box.appendChild(el('p', 'budget', `Rough budget (our estimate): ${plan.budget}`));
+    planActions(box, plan);
     log.appendChild(box); scroll();
+  }
+
+  // Take the plan with you: as text, or into the /Glow app by link or QR code (the plan rides in the link itself)
+  function planActions(box, plan) {
+    const PL = window.GlowPlanLink; if (!PL) return;
+    const row = el('div', 'pactions');
+    const copy = el('button', 'chip', 'Copy as text'); copy.type = 'button';
+    copy.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(PL.text(plan, catalog)); copy.textContent = 'Copied ✓'; setTimeout(() => { copy.textContent = 'Copy as text'; }, 1500); }
+      catch { copy.textContent = 'Copy didn’t work here'; }
+    });
+    const toApp = el('button', 'chip', 'Send to the /Glow app'); toApp.type = 'button';
+    const panel = el('div', 'handoff'); panel.hidden = true;
+    toApp.addEventListener('click', async () => {
+      if (!panel.hidden) { panel.hidden = true; return; }
+      if (!panel.childNodes.length) {
+        const packed = await PL.pack(plan);
+        if (!packed) { panel.appendChild(el('p', null, 'This plan is too long for a code. Copy it as text instead.')); }
+        else {
+          const android = /Android/i.test(navigator.userAgent);
+          if (android) { const a = el('a', 'btn', 'Open in /Glow'); a.href = PL.intent(packed); panel.appendChild(a); }
+          else {
+            panel.appendChild(el('p', null, 'Scan with your Android phone’s camera to open this plan in /Glow. It opens your parts, steps and zones, ready to set up.'));
+            panel.appendChild(PL.qrSVG(PL.link(packed), 240));
+          }
+          const share = el('a', null, 'Or open the link'); share.href = PL.link(packed); share.target = '_blank'; share.rel = 'noopener';
+          panel.appendChild(el('p', 'fineprint', 'The plan travels inside the link itself; nothing is stored on a server. '));
+          panel.lastChild.appendChild(share);
+        }
+      }
+      panel.hidden = false; scroll();
+    });
+    row.append(copy, toApp); box.append(row, panel);
+  }
+
+  // About this space: a few taps the planner shouldn't have to ask about (rent or own, units, outlet, sound)
+  function renderSpace() {
+    const host = $('space'); if (!host || !rules?.space) return;
+    host.textContent = '';
+    for (const q of rules.space) {
+      const g = el('div', 'sgroup'); g.appendChild(el('p', 'label', q.label));
+      const wrap = el('div', 'schips');
+      for (const [val, label] of q.options) {
+        const b = el('button', 'chip' + (space[q.key] === val ? ' on' : ''), label); b.type = 'button';
+        b.setAttribute('aria-pressed', space[q.key] === val ? 'true' : 'false');
+        b.addEventListener('click', () => { if (space[q.key] === val) delete space[q.key]; else space[q.key] = val; renderSpace(); });
+        wrap.appendChild(b);
+      }
+      g.appendChild(wrap); host.appendChild(g);
+    }
   }
 
   function setChips(list) {
@@ -183,8 +235,8 @@
     log.appendChild(typing); scroll();
     try {
       await ensureSession(false);
-      let r = await post('/chat', { session, messages: turns });
-      if (r.status === 401) { await ensureSession(true); r = await post('/chat', { session, messages: turns }); }
+      let r = await post('/chat', { session, messages: turns, space });
+      if (r.status === 401) { await ensureSession(true); r = await post('/chat', { session, messages: turns, space }); }
       typing.remove();
       if (r.status === 200) {
         const a = r.data;
@@ -252,6 +304,7 @@
 
   async function start() {
     try { await loadCatalog(); } catch { catalog = { items: [] }; }
+    try { rules = await (await fetch('planner.json', { cache: 'no-cache' })).json(); renderSpace(); } catch { /* chips are optional */ }
     if (TAG) $('assoc').hidden = false;
 
     if (!WORKER) {

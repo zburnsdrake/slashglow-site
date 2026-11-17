@@ -73,6 +73,9 @@ footer p{margin:0 0 6px}
 .dots span:nth-child(2){animation-delay:.15s}.dots span:nth-child(3){animation-delay:.3s}
 @keyframes b{0%,80%,100%{opacity:.25}40%{opacity:1}}
 @media (prefers-reduced-motion:reduce){.dots span{animation:none}}
+.pactions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.handoff{margin-top:12px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--card2)}.handoff p{margin:0 0 10px;font-size:15px;color:#c3cada}.handoff svg{display:block;border-radius:8px}.fineprint{font-size:13px!important;color:var(--dim)!important;margin-top:10px!important}
+.sgroup{margin-bottom:10px}.schips{display:flex;flex-wrap:wrap;gap:6px}.chip.on{border-color:var(--accent);color:var(--hi);background:#1d2540}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 </head>
@@ -123,9 +126,14 @@ footer p{margin:0 0 6px}
       <a class="btn" href="index.html#beta">Join the beta</a>
     </div>
     <div class="card">
+      <h2>About this space</h2>
+      <p>Optional. Tap what fits so the planner doesn't have to ask.</p>
+      <div id="space"></div>
+    </div>
+    <div class="card">
       <h2>How the planner picks parts</h2>
       <ul>
-        <li>Only gear /Glow has tested, marked Tested or Testing.</li>
+        <li>Only gear /Glow has bought and checked. <b>Tested</b>: its testing checklist is done. <b>In testing</b>: bought, checks under way. <a href="testing.html">The checklists</a></li>
         <li>Ranked by what works, never by who pays more.</li>
         <li>Low-voltage DC only. Anything on mains wiring goes to an electrician.</li>
       </ul>
@@ -138,6 +146,8 @@ footer p{margin:0 0 6px}
   <p id="assoc" hidden>As an Amazon Associate, /Glow earns from qualifying purchases.</p>
 </footer>
 </div>
+<script src="assets/qr.js"></script>
+<script src="assets/planlink.js"></script>
 <script src="assets/planner.js"></script>
 </body>
 </html>

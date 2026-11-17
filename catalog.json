@@ -1,7 +1,7 @@
 {
-  "v": 1,
+  "v": 2,
   "updated": "2026-11-17",
-  "note": "Parts /Glow recommends. status: tested = confirmed working with /Glow on real hardware; testing = expected to work, being confirmed now. The planner may only recommend items from this list. Add an ASIN (amazon) or a store link once the affiliate accounts exist; items without one show 'Link coming soon'.",
+  "note": "Parts /Glow recommends. status: tested = the testing checklist for its kind is complete (by /Glow, or by a beta tester who owns it); testing = bought and being checked now. The planner may only recommend items from this list. kind tool and sound items are not controlled by /Glow. Add an ASIN (amazon) or a store link once the affiliate accounts exist; items without one show 'Link coming soon'.",
   "items": [
     {
       "id": "lbt-tesla-kit",
@@ -106,6 +106,86 @@
       "summary": "Joins strip sections and extends leads to the controller.",
       "amazon": null,
       "store": null
+    },
+    {
+      "id": "trim-tool-kit",
+      "name": "Trim removal tool kit with fish rod",
+      "kind": "tool",
+      "places": ["car"],
+      "status": "testing",
+      "summary": "Plastic pry tools for panels and clips, plus a stiff fish rod for pulling wire through door boots.",
+      "amazon": null,
+      "store": null
+    },
+    {
+      "id": "air-wedges",
+      "name": "Inflatable air wedges",
+      "kind": "tool",
+      "places": ["car"],
+      "status": "testing",
+      "summary": "Open a gap behind a door card or panel gently, so clips aren't snapped.",
+      "amazon": null,
+      "store": null
+    },
+    {
+      "id": "clip-pliers",
+      "name": "Panel clip pliers",
+      "kind": "tool",
+      "places": ["car"],
+      "status": "testing",
+      "summary": "Lift door clips and grommets straight out of the metal with little paint contact.",
+      "amazon": null,
+      "store": null
+    },
+    {
+      "id": "tesla-door-clips",
+      "name": "Model 3/Y door panel clips (spares)",
+      "kind": "tool",
+      "places": ["car"],
+      "status": "testing",
+      "summary": "Door clips are meant to be replaced when a panel comes off; have spares before you start.",
+      "amazon": null,
+      "store": null
+    },
+    {
+      "id": "smsl-ps100",
+      "name": "SMSL PS100 DAC (HDMI ARC)",
+      "kind": "sound",
+      "places": ["tv"],
+      "status": "testing",
+      "summary": "Takes the TV's ARC audio so the TV remote sets the volume; feeds a small amp. Not controlled by /Glow.",
+      "amazon": null,
+      "store": null
+    },
+    {
+      "id": "fosi-v3",
+      "name": "Fosi Audio V3 stereo amplifier",
+      "kind": "sound",
+      "places": ["tv", "desk"],
+      "status": "testing",
+      "summary": "Compact amp for passive bookshelf speakers. Not controlled by /Glow.",
+      "amazon": null,
+      "store": null
+    },
+    {
+      "id": "wharfedale-bookshelf",
+      "name": "Wharfedale passive bookshelf speakers",
+      "kind": "sound",
+      "places": ["tv", "desk"],
+      "status": "testing",
+      "summary": "Passive speakers for the DAC and amp chain; leave room off the back wall. Not controlled by /Glow.",
+      "amazon": null,
+      "store": null
     }
-  ]
+  ],
+  "checklists": {
+    "controller": ["Found and connected in /Glow", "On/off, color and brightness respond", "Every look in Patterns plays", "Music mode follows the beat", "Stays connected for 30 minutes", "Reconnects after the power is cut and restored", "Keeps running with the phone screen off"],
+    "kit": ["Installed following the /Glow guide or the kit's own steps", "Every zone responds in /Glow", "Lights wake with the car or phone as set up", "No rattles or loose panels after a week of driving"],
+    "strip": ["Every pixel lights, in the right color order", "Full white for 10 minutes without the far end dimming or yellowing", "No flicker during music mode"],
+    "power": ["Runs its zone at full white for 30 minutes", "Warm, not hot, with air around it"],
+    "mounting": ["Holds in place for two weeks", "Comes off cleanly if it was meant to (renters)"],
+    "wiring": ["Lights work through it at full white", "Still secure after two weeks"],
+    "tool": ["Used on a real install", "Did the job without damaging trim or paint"],
+    "sound": ["Plays daily for two weeks", "No hum or buzz at normal volume", "Volume works from the TV remote, if the chain says so", "/Glow music mode reacts to it from the phone's mic"]
+  }
 }

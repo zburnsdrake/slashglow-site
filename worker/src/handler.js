@@ -126,7 +126,7 @@ export function cleanAnswer(raw, catalog) {
   return a;
 }
 
-async function askModel(env, deps, catalog, contents) {
+async function askModel(env, deps, catalog, contents, space) {
   const generationConfig = {
     responseMimeType: 'application/json',
     responseSchema: responseSchema(catalog),
@@ -136,7 +136,7 @@ async function askModel(env, deps, catalog, contents) {
   const r = await deps.fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(env.MODEL)}:generateContent`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
-    body: JSON.stringify({ systemInstruction: { parts: [{ text: systemPrompt(catalog) }] }, contents, generationConfig })
+    body: JSON.stringify({ systemInstruction: { parts: [{ text: systemPrompt(catalog, space) }] }, contents, generationConfig })
   });
   if (!r.ok) return { error: r.status };
   const data = await r.json();
@@ -196,10 +196,10 @@ export async function handle(request, env, deps) {
     if (!gate.ok) return json({ error: 'limit', scope: gate.reason }, 429, cors);
 
     const catalog = deps.catalog;
-    let res = await askModel(env, deps, catalog, contents);
+    let res = await askModel(env, deps, catalog, contents, body?.space);
     if (res.error === 429 || res.error === 503) {
       await new Promise(r => setTimeout(r, deps.retryDelay ?? 1500));
-      res = await askModel(env, deps, catalog, contents);
+      res = await askModel(env, deps, catalog, contents, body?.space);
     }
     if (res.error) return json({ error: 'model', status: res.error }, 502, cors);
     if (res.tokens) await deps.limiter.addTokens({ day, tokens: res.tokens });
