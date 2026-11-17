@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>/Glow for cars and trucks</title>
 <meta name="description" content="/Glow for cars and trucks: wake-on-unlock welcome scenes, music and Mood for aftermarket ambient light kits.">
@@ -216,16 +215,24 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 </section>
 
 <section id="beta" style="max-width: 1180px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; gap: 22px">
-<div style="flex: 1 1 420px; min-width: 0; background: linear-gradient(160deg, #1b2236, #151922); border: 1px solid #2f3a5a; border-radius: 22px; padding: 32px; display: flex; flex-direction: column; gap: 14px">
+<form data-form="beta" style="flex: 1 1 420px; min-width: 0; background: linear-gradient(160deg, #1b2236, #151922); border: 1px solid #2f3a5a; border-radius: 22px; padding: 32px; display: flex; flex-direction: column; gap: 14px">
 <h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: 32px; letter-spacing: -0.5px; color: #f5f7fb">Join the Android beta</h2>
 <p style="margin: 0; color: #b7bfd1">Use the Google account on your Android phone. You’ll get an invite to test /Glow from Google Play.</p>
-<a data-form="beta" href="#" style="font: inherit; font-weight: 600; cursor: pointer; text-align: center; text-decoration: none; margin-top: 6px; background: #8ea6ff; color: #0b0d12; border: 0; border-radius: 12px; padding: 15px 20px">Request an invite</a>
-</div>
-<div id="iphone" style="flex: 1 1 340px; min-width: 0; background: #151922; border: 1px solid #222838; border-radius: 22px; padding: 32px; display: flex; flex-direction: column; gap: 14px">
+<label for="beta-email" style="font-size: 14px; color: #b7bfd1">Google account email</label>
+<input id="beta-email" name="email" required autocomplete="email" type="email" placeholder="you@gmail.com" style="font: inherit; color: #e9ecf3; background: #0f121a; border: 1px solid #2a3142; border-radius: 12px; padding: 14px 16px">
+<label for="beta-kit" style="font-size: 14px; color: #b7bfd1">Your car and light kit (optional)</label>
+<input id="beta-kit" name="kit" type="text" placeholder="e.g. 2022 Model 3, controller LEDCAR-01" style="font: inherit; color: #e9ecf3; background: #0f121a; border: 1px solid #2a3142; border-radius: 12px; padding: 14px 16px">
+<button type="submit" style="font: inherit; font-weight: 600; cursor: pointer; margin-top: 6px; background: #8ea6ff; color: #0b0d12; border: 0; border-radius: 12px; padding: 15px 20px">Request an invite</button>
+<p data-form-msg role="status" style="margin: 0; font-size: 15px; color: #b7bfd1"></p>
+</form>
+<form data-form="iphone" id="iphone" style="flex: 1 1 340px; min-width: 0; background: #151922; border: 1px solid #222838; border-radius: 22px; padding: 32px; display: flex; flex-direction: column; gap: 14px">
 <h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: 28px; letter-spacing: -0.4px; color: #f5f7fb">iPhone: coming soon</h2>
 <p style="margin: 0; color: #b7bfd1">Leave your email and we’ll let you know when /Glow for iPhone is ready to test.</p>
-<a data-form="iphone" href="#" style="font: inherit; font-weight: 600; cursor: pointer; text-align: center; text-decoration: none; margin-top: 6px; background: transparent; color: #e9ecf3; border: 1px solid #3a4360; border-radius: 12px; padding: 15px 20px">Notify me</a>
-</div>
+<label for="ios-email" style="font-size: 14px; color: #b7bfd1">Email</label>
+<input id="ios-email" name="email" required autocomplete="email" type="email" placeholder="you@icloud.com" style="font: inherit; color: #e9ecf3; background: #0f121a; border: 1px solid #2a3142; border-radius: 12px; padding: 14px 16px">
+<button type="submit" style="font: inherit; font-weight: 600; cursor: pointer; margin-top: 6px; background: transparent; color: #e9ecf3; border: 1px solid #3a4360; border-radius: 12px; padding: 15px 20px">Notify me</button>
+<p data-form-msg role="status" style="margin: 0; font-size: 15px; color: #b7bfd1"></p>
+</form>
 </section>
 
 <footer style="border-top: 1px solid #1d2230">
