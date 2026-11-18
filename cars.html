@@ -218,10 +218,18 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 <form data-form="beta" style="flex: 1 1 420px; min-width: 0; background: linear-gradient(160deg, #1b2236, #151922); border: 1px solid #2f3a5a; border-radius: 22px; padding: 32px; display: flex; flex-direction: column; gap: 14px">
 <h2 style="margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: 32px; letter-spacing: -0.5px; color: #f5f7fb">Join the Android beta</h2>
 <p style="margin: 0; color: #b7bfd1">Use the Google account on your Android phone. You’ll get an invite to test /Glow from Google Play.</p>
-<label for="beta-email" style="font-size: 14px; color: #b7bfd1">Google account email</label>
+<label for="beta-email" style="font-size: 14px; color: #b7bfd1">Google account email (the one signed in to Play Store)</label>
 <input id="beta-email" name="email" required autocomplete="email" type="email" placeholder="you@gmail.com" style="font: inherit; color: #e9ecf3; background: #0f121a; border: 1px solid #2a3142; border-radius: 12px; padding: 14px 16px">
-<label for="beta-kit" style="font-size: 14px; color: #b7bfd1">Your car and light kit (optional)</label>
-<input id="beta-kit" name="kit" type="text" placeholder="e.g. 2022 Model 3, controller LEDCAR-01" style="font: inherit; color: #e9ecf3; background: #0f121a; border: 1px solid #2a3142; border-radius: 12px; padding: 14px 16px">
+<label for="beta-kit" style="font-size: 14px; color: #b7bfd1">Your lights: where they are, the brand and the app they use today</label>
+<input id="beta-kit" name="kit" required type="text" placeholder="e.g. car kit by LightingBugTech, LED LAMP app; or TV wall, SP630E" style="font: inherit; color: #e9ecf3; background: #0f121a; border: 1px solid #2a3142; border-radius: 12px; padding: 14px 16px">
+<label for="beta-car" style="font-size: 14px; color: #b7bfd1">Car, if they’re in one (optional)</label>
+<input id="beta-car" name="car" type="text" placeholder="e.g. 2024 Tesla Model Y" style="font: inherit; color: #e9ecf3; background: #0f121a; border: 1px solid #2a3142; border-radius: 12px; padding: 14px 16px">
+<label for="beta-phone" style="font-size: 14px; color: #b7bfd1">Phone model</label>
+<input id="beta-phone" name="phone" required type="text" placeholder="e.g. Pixel 10 Pro XL, Galaxy S25" style="font: inherit; color: #e9ecf3; background: #0f121a; border: 1px solid #2a3142; border-radius: 12px; padding: 14px 16px">
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 14px"><legend style="font-size: 14px; color: #b7bfd1; margin-bottom: 8px">Music apps you use (optional)</legend><label style="display: inline-flex; gap: 6px; align-items: center; color: #c3cada; font-size: 15px"><input type="checkbox" name="music" value="Spotify"> Spotify</label><label style="display: inline-flex; gap: 6px; align-items: center; color: #c3cada; font-size: 15px"><input type="checkbox" name="music" value="Tidal"> Tidal</label><label style="display: inline-flex; gap: 6px; align-items: center; color: #c3cada; font-size: 15px"><input type="checkbox" name="music" value="YouTube Music"> YouTube Music</label><label style="display: inline-flex; gap: 6px; align-items: center; color: #c3cada; font-size: 15px"><input type="checkbox" name="music" value="Apple Music"> Apple Music</label><label style="display: inline-flex; gap: 6px; align-items: center; color: #c3cada; font-size: 15px"><input type="checkbox" name="music" value="Amazon Music"> Amazon Music</label><label style="display: inline-flex; gap: 6px; align-items: center; color: #c3cada; font-size: 15px"><input type="checkbox" name="music" value="The car&#39;s own apps"> The car’s own apps</label></fieldset>
+<label style="display: inline-flex; gap: 8px; align-items: center; color: #c3cada; font-size: 15px"><input type="checkbox" name="weekly" value="I can try new builds weekly and send a log"> I can try new builds weekly and send a log</label>
+<label for="beta-heard" style="font-size: 14px; color: #b7bfd1">How did you hear about /Glow? (optional)</label>
+<input id="beta-heard" name="heard" type="text" placeholder="e.g. r/TeslaModelY" style="font: inherit; color: #e9ecf3; background: #0f121a; border: 1px solid #2a3142; border-radius: 12px; padding: 14px 16px">
 <button type="submit" style="font: inherit; font-weight: 600; cursor: pointer; margin-top: 6px; background: #8ea6ff; color: #0b0d12; border: 0; border-radius: 12px; padding: 15px 20px">Request an invite</button>
 <p data-form-msg role="status" style="margin: 0; font-size: 15px; color: #b7bfd1"></p>
 </form>
@@ -230,6 +238,10 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 <p style="margin: 0; color: #b7bfd1">Leave your email and we’ll let you know when /Glow for iPhone is ready to test.</p>
 <label for="ios-email" style="font-size: 14px; color: #b7bfd1">Email</label>
 <input id="ios-email" name="email" required autocomplete="email" type="email" placeholder="you@icloud.com" style="font: inherit; color: #e9ecf3; background: #0f121a; border: 1px solid #2a3142; border-radius: 12px; padding: 14px 16px">
+<label for="ios-kit" style="font-size: 14px; color: #b7bfd1">Your lights (optional)</label>
+<input id="ios-kit" name="kit" type="text" placeholder="e.g. car kit by LightingBugTech" style="font: inherit; color: #e9ecf3; background: #0f121a; border: 1px solid #2a3142; border-radius: 12px; padding: 14px 16px">
+<label for="ios-car" style="font-size: 14px; color: #b7bfd1">Car, if they’re in one (optional)</label>
+<input id="ios-car" name="car" type="text" placeholder="e.g. 2024 Tesla Model Y" style="font: inherit; color: #e9ecf3; background: #0f121a; border: 1px solid #2a3142; border-radius: 12px; padding: 14px 16px">
 <button type="submit" style="font: inherit; font-weight: 600; cursor: pointer; margin-top: 6px; background: transparent; color: #e9ecf3; border: 1px solid #3a4360; border-radius: 12px; padding: 15px 20px">Notify me</button>
 <p data-form-msg role="status" style="margin: 0; font-size: 15px; color: #b7bfd1"></p>
 </form>

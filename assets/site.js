@@ -5,8 +5,11 @@ window.GLOW_SITE = {
   //   action: the link up to "/viewform", with "/formResponse" in its place
   //   fields: each "entry.123456" from the link, for the question it belongs to
   // Empty action = the button says sign-ups open soon.
-  beta:   { action: '', fields: { email: '', kit: '' } },
-  iphone: { action: '', fields: { email: '' } },
+  beta:   { action: 'https://docs.google.com/forms/d/e/1FAIpQLSdxSAbXe_LhPxwq_RIkFSu3ZCBqXJdBGMU34ej3gURJGOJKQQ/formResponse',
+            fields: { email: 'entry.413371805', car: 'entry.1372020356', kit: 'entry.1728377926', phone: 'entry.260600615',
+                      music: 'entry.1675183833', weekly: 'entry.1055466153', heard: 'entry.295920219' } },
+  iphone: { action: 'https://docs.google.com/forms/d/e/1FAIpQLSda9Tr7MVfzAi8-secygXotVYRhbRutwRvuCdI3-MAUsNwslg/formResponse',
+            fields: { email: 'entry.2017772158', car: 'entry.989577901', kit: 'entry.1012979735' } },
   // Community subreddit, e.g. 'https://www.reddit.com/r/slashglow'. Empty = the button stays hidden.
   reddit: ''
 };
@@ -18,7 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
     f.addEventListener('submit', async e => {
       e.preventDefault();
       const body = new URLSearchParams();   // sent form-encoded, the way Google Forms expects
-      for(const [name, entry] of Object.entries(cfg.fields || {})){ const el = f.elements[name]; if(entry && el) body.append(entry, el.value.trim()); }
+      for(const [name, entry] of Object.entries(cfg.fields || {})){
+        if(!entry) continue;
+        // checkboxes send one value per ticked box; text fields send their text
+        const boxes = [...f.querySelectorAll(`input[type=checkbox][name="${name}"]`)];
+        if(boxes.length){ boxes.filter(b => b.checked).forEach(b => body.append(entry, b.value)); continue; }
+        const el = f.elements[name]; if(el && el.value.trim()) body.append(entry, el.value.trim());
+      }
       btn.disabled = true; const label = btn.textContent; btn.textContent = 'Sending…';
       try{
         // Google Forms accepts the post but doesn't let a page read its answer, so a sent request counts as done
