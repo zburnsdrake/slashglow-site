@@ -11,17 +11,21 @@ MUSIC = ['Spotify', 'Tidal', 'YouTube Music', 'Apple Music', 'Amazon Music', "Th
 music = (f'<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 14px"><legend style="{L}; margin-bottom: 8px">Music apps you use (optional)</legend>'
     + ''.join(f'<label style="display: inline-flex; gap: 6px; align-items: center; color: #c3cada; font-size: 15px"><input type="checkbox" name="music" value="{m.replace(chr(39), "&#39;")}"> {m.replace(chr(39), "’")}</label>' for m in MUSIC) + '</fieldset>\n')
 weekly = '<label style="display: inline-flex; gap: 8px; align-items: center; color: #c3cada; font-size: 15px"><input type="checkbox" name="weekly" value="I can try new builds weekly and send a log"> I can try new builds weekly and send a log</label>\n'
+later = '<label style="display: inline-flex; gap: 8px; align-items: center; color: #c3cada; font-size: 15px"><input type="checkbox" name="later" value="I&#39;d also like to test home lights (TV, desk, room) later"> I’d also like to test home lights (TV, desk, room) later</label>\n'
+# The beta is for car lights for now (any car, any kit); home lights come later, so people can opt in to hear about it.
 BETA = (inp('beta-email', 'email', 'Google account email (the one signed in to Play Store)', 'you@gmail.com', True, 'email', 'email')
-    + inp('beta-kit', 'kit', 'Your lights: where they are, the brand and the app they use today', 'e.g. car kit by LightingBugTech, LED LAMP app; or TV wall, SP630E', True)
-    + inp('beta-car', 'car', 'Car, if they’re in one (optional)', 'e.g. 2024 Tesla Model Y')
+    + inp('beta-car', 'car', 'Car: make, model and year', 'e.g. 2024 Tesla Model Y', True)
+    + inp('beta-kit', 'kit', 'Light kit: brand, and the app it uses today', 'e.g. LightingBugTech, LED LAMP app', True)
     + inp('beta-phone', 'phone', 'Phone model', 'e.g. Pixel 10 Pro XL, Galaxy S25', True)
-    + music + weekly
+    + music + weekly + later
     + inp('beta-heard', 'heard', 'How did you hear about /Glow? (optional)', 'e.g. r/TeslaModelY'))
+HEAD = ('<h2 style="margin: 0; font-family: \'Space Grotesk\', Inter, sans-serif; font-size: 32px; letter-spacing: -0.5px; color: #f5f7fb">Join the car beta (Android)</h2>\n'
+    '<p style="margin: 0; color: #b7bfd1">Any car, any Bluetooth light kit. Use the Google account on your Android phone: you’ll get an invite to test /Glow from Google Play. Home lights come next.</p>\n')
 IOS = (inp('ios-email', 'email', 'Email', 'you@icloud.com', True, 'email', 'email')
     + inp('ios-kit', 'kit', 'Your lights (optional)', 'e.g. car kit by LightingBugTech')
     + inp('ios-car', 'car', 'Car, if they’re in one (optional)', 'e.g. 2024 Tesla Model Y'))
 def fix(html):
-    html = re.sub(r'(<form data-form="beta"[^>]*>.*?</p>\n)<label for="beta-email".*?(?=<button type="submit")', lambda m: m.group(1) + BETA, html, flags=re.S)
+    html = re.sub(r'(<form data-form="beta"[^>]*>\n?)<h2.*?</p>\n<label for="beta-email".*?(?=<button type="submit")', lambda m: m.group(1) + HEAD + BETA, html, flags=re.S)
     return re.sub(r'(<form data-form="iphone"[^>]*>.*?</p>\n)<label for="ios-email".*?(?=<button type="submit")', lambda m: m.group(1) + IOS, html, flags=re.S)
 if __name__ == '__main__':
     root = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')

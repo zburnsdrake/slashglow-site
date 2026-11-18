@@ -7,7 +7,7 @@ window.GLOW_SITE = {
   // Empty action = the button says sign-ups open soon.
   beta:   { action: 'https://docs.google.com/forms/d/e/1FAIpQLSdxSAbXe_LhPxwq_RIkFSu3ZCBqXJdBGMU34ej3gURJGOJKQQ/formResponse',
             fields: { email: 'entry.413371805', car: 'entry.1372020356', kit: 'entry.1728377926', phone: 'entry.260600615',
-                      music: 'entry.1675183833', weekly: 'entry.1055466153', heard: 'entry.295920219' } },
+                      music: 'entry.1675183833', weekly: 'entry.1055466153', later: 'entry.1558123359', heard: 'entry.295920219' } },
   iphone: { action: 'https://docs.google.com/forms/d/e/1FAIpQLSda9Tr7MVfzAi8-secygXotVYRhbRutwRvuCdI3-MAUsNwslg/formResponse',
             fields: { email: 'entry.2017772158', car: 'entry.989577901', kit: 'entry.1012979735' } },
   // Community subreddit, e.g. 'https://www.reddit.com/r/slashglow'. Empty = the button stays hidden.
