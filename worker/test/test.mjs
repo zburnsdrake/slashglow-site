@@ -1,7 +1,7 @@
 // Plain-Node tests for the planner Worker logic: node worker/test/test.mjs
 import assert from 'node:assert/strict';
 import catalog from '../../catalog.json' with { type: 'json' };
-import { handle, cleanTurns, cleanAnswer, readSession, makeSession } from '../src/handler.js';
+import { handle, cleanTurns, cleanAnswer, readSession, makeSession, cleanAiRequest } from '../src/handler.js';
 import { LimiterCore, memoryStore } from '../src/limiter.js';
 import { systemPrompt, responseSchema } from '../src/prompt.js';
 
@@ -13,7 +13,7 @@ const env = {
 let now = Date.parse('2026-11-17T12:00:00Z');
 const store = memoryStore();
 const core = new LimiterCore(store);
-const limiter = { take: async a => core.take(a), addTokens: async a => core.addTokens(a), status: async a => core.status(a) };
+const limiter = { take: async a => core.take(a), addTokens: async a => core.addTokens(a), status: async a => core.status(a), takeAi: async a => core.takeAi(a), addAiTokens: async a => core.addAiTokens(a) };
 let modelReply = { reply: 'Here is a plan.', offTopic: false, plan: { title: 'TV wall', items: [{ id: 'sp110e', qty: 1, why: 'TV' }, { id: 'made-up', qty: 2 }], steps: ['Mount'] }, followUps: ['How long?'] };
 let modelStatus = 200, calls = [];
 const fakeFetch = async (url, init) => {
@@ -164,6 +164,53 @@ await t('the app has the same parts list and planner rules (run scripts/sync-app
   const site = new URL('../../', import.meta.url), app = new URL('../../../glow-lights/app/src/main/assets/', import.meta.url);
   if (!existsSync(app)) { console.log('   (app repo not next to this one; skipped)'); return; }
   for (const f of ['catalog.json', 'planner.json']) assert.equal(readFileSync(new URL(f, app), 'utf8'), readFileSync(new URL(f, site), 'utf8'), f + ' differs');
+});
+
+// ---------------------------------------------------------------- Glow AI
+const aiEnv = { ...env, GLOW_AI_KEY: 'ai-key', GLOW_AI_CODES: 'beta-zach1, beta-autumn', LIMIT_AI_PER_CODE: '2' };
+const aiCall = async (body, { code = 'beta-zach1', origin = null } = {}) => {
+  const headers = { 'Content-Type': 'application/json', 'CF-Connecting-IP': '9.9.9.9' };
+  if (code !== null) headers['X-Glow-Code'] = code;
+  if (origin) headers.Origin = origin;
+  const r = await handle(new Request('https://planner.example.workers.dev/ai', { method: 'POST', headers, body: JSON.stringify(body) }), aiEnv, deps);
+  return { status: r.status, body: await r.json().catch(() => null) };
+};
+const aiBody = { systemInstruction: { parts: [{ text: 'You are Glow.' }] }, contents: [{ role: 'user', parts: [{ text: 'hi' }] }], generationConfig: { maxOutputTokens: 99999 }, tools: [{ googleSearch: {} }] };
+
+await t('Glow AI needs a valid invite code (no Origin needed: it is the app)', async () => {
+  modelStatus = 200; modelReply = 'Hello!';
+  assert.equal((await aiCall(aiBody, { code: null })).status, 401);
+  assert.equal((await aiCall(aiBody, { code: 'wrong-code' })).status, 401);
+  assert.equal((await aiCall(aiBody, { origin: 'https://evil.example' })).status, 403);
+  calls = [];
+  const r = await aiCall(aiBody);
+  assert.equal(r.status, 200);
+  assert.equal(typeof r.body.candidates[0].content.parts[0].text, 'string');
+  const sent = calls.find(c => c.url.includes('generateContent'));
+  assert.equal(sent.init.headers['x-goog-api-key'], 'ai-key');
+  const b = JSON.parse(sent.init.body);
+  assert.equal(b.tools, undefined);                      // no tools pass through
+  assert.equal(b.generationConfig.maxOutputTokens, 4000); // output capped
+  assert.ok(!JSON.stringify(b).includes('beta-zach1'));  // the code never reaches Google
+});
+
+await t('Glow AI caps each code per day, separately from the planner', async () => {
+  assert.equal((await aiCall(aiBody)).status, 200);              // 2nd of 2
+  const r = await aiCall(aiBody);
+  assert.equal(r.status, 403); assert.equal(r.body.error.code, 'limit');
+  assert.equal((await aiCall(aiBody, { code: 'beta-autumn' })).status, 200);
+  assert.ok(!store.keys().some(k => k.includes('beta-')));       // codes only stored as hashes
+});
+
+await t('Glow AI keeps only text and images', () => {
+  const c = cleanAiRequest({ contents: [{ role: 'user', parts: [{ text: 'look' }, { inline_data: { mime_type: 'image/jpeg', data: 'AAAA' } }, { file_data: { file_uri: 'gs://x' } }, { inline_data: { mime_type: 'application/pdf', data: 'AAAA' } }] }] });
+  assert.equal(c.contents[0].parts.length, 2);
+  assert.equal(cleanAiRequest({ contents: [{ role: 'model', parts: [{ text: 'x' }] }] }), null);
+});
+
+await t('Glow AI is off until its key is set', async () => {
+  const r = await handle(new Request('https://x/ai', { method: 'POST', headers: { 'X-Glow-Code': 'beta-zach1' }, body: '{}' }), { ...aiEnv, GLOW_AI_KEY: '' }, deps);
+  assert.equal(r.status, 503);
 });
 
 console.log(`\n${pass} passed`);

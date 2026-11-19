@@ -25,6 +25,8 @@ export class Limiter extends DurableObject {
   }
   async take(args) { this.purgeOld(args.day); return this.core.take(args); }
   async addTokens(args) { return this.core.addTokens(args); }
+  async takeAi(args) { this.purgeOld(args.day); return this.core.takeAi(args); }
+  async addAiTokens(args) { return this.core.addAiTokens(args); }
   async status(args) { return this.core.status(args); }
 }
 

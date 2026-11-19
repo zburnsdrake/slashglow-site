@@ -29,6 +29,22 @@ export class LimiterCore {
     return { ok: true, remaining: Math.min(limits.perSession - s - 1, limits.perIp - ip - 1) };
   }
 
+  // Glow AI (the app's built-in assistant): per invite code per day, plus its own global message and token caps.
+  takeAi({ day, codeKey, limits }) {
+    const k = { g: `ai:g:msgs:${day}`, tok: `ai:g:tok:${day}`, c: `ai:c:${day}:${codeKey}` };
+    const g = this.store.get(k.g), tok = this.store.get(k.tok), c = this.store.get(k.c);
+    if (g >= limits.aiGlobalMessages || tok >= limits.aiGlobalTokens) return { ok: false, reason: 'global' };
+    if (c >= limits.aiPerCode) return { ok: false, reason: 'code' };
+    this.store.set(k.g, day, g + 1);
+    this.store.set(k.c, day, c + 1);
+    return { ok: true, remaining: limits.aiPerCode - c - 1 };
+  }
+
+  addAiTokens({ day, tokens }) {
+    const key = `ai:g:tok:${day}`;
+    this.store.set(key, day, this.store.get(key) + Math.max(0, tokens | 0));
+  }
+
   addTokens({ day, tokens }) {
     const key = `g:tok:${day}`;
     this.store.set(key, day, this.store.get(key) + Math.max(0, tokens | 0));

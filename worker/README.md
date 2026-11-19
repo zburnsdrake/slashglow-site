@@ -6,6 +6,14 @@ Holds the AI key and the planner's scope, so the website itself never sees the k
 - `POST /session`: checks Cloudflare Turnstile (bot check), returns a signed 6-hour session token.
 - `POST /chat`: checks the session and the daily limits, asks Gemini with the scoped instructions in `src/prompt.js`, returns a reply plus a plan made only of items in `../catalog.json`.
 - `GET /status`: whether today's global limit is still open.
+- `POST /ai`: **Glow AI**, the app's built-in assistant for beta testers. The app sends a Gemini-style request with an invite code in `X-Glow-Code`; the Worker checks the code and its daily cap, keeps only text and images, adds the `GLOW_AI_KEY` and returns only the answer text. No Origin needed (it's the Android app); no key ever ships in the app.
+
+### Glow AI setup
+Cloudflare → Workers & Pages → slashglow-planner → Settings → Variables and Secrets → Add, type **Secret**:
+- `GLOW_AI_KEY`: the "/Glow AI" Gemini key.
+- `GLOW_AI_CODES`: invite codes, comma-separated, 6+ characters each (e.g. one per tester). Remove a code to cut someone off.
+
+Limits: `LIMIT_AI_PER_CODE` (150/day), `LIMIT_AI_GLOBAL_MESSAGES` (3,000/day), `LIMIT_AI_GLOBAL_TOKENS` (6M/day). Model: `AI_MODEL`, else `MODEL`.
 
 ## Limits (in `wrangler.toml`)
 | Limit | Default |

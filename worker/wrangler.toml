@@ -18,11 +18,19 @@ LIMIT_PER_IP = "60"             # messages per IP per day (generous: phones shar
 LIMIT_GLOBAL_MESSAGES = "1500"  # all visitors per day; the chat closes for the day after
 LIMIT_GLOBAL_TOKENS = "3000000" # all visitors per day, in model tokens
 
+# Glow AI (the app's assistant for beta testers, POST /ai)
+# AI_MODEL = "gemini-3.5-flash"  # optional; defaults to MODEL above
+LIMIT_AI_PER_CODE = "150"          # questions per invite code per day
+LIMIT_AI_GLOBAL_MESSAGES = "3000"  # all testers per day
+LIMIT_AI_GLOBAL_TOKENS = "6000000" # all testers per day, in model tokens
+
 # Secrets (set with `npx wrangler secret put NAME`, never in this file):
 #   GEMINI_API_KEY    paid-tier Gemini API key
 #   TURNSTILE_SECRET  Turnstile widget secret key
 #   SESSION_SECRET    any long random string
 #   IP_SALT           any long random string
+#   GLOW_AI_KEY       Gemini key for Glow AI (the "/Glow AI" key)
+#   GLOW_AI_CODES     beta invite codes, comma-separated (6+ characters each)
 
 [[durable_objects.bindings]]
 name = "LIMITER"

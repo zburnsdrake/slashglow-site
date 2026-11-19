@@ -62,7 +62,10 @@ function limits(env) {
     perSession: n(env.LIMIT_PER_SESSION, 25),
     perIp: n(env.LIMIT_PER_IP, 60),
     globalMessages: n(env.LIMIT_GLOBAL_MESSAGES, 1500),
-    globalTokens: n(env.LIMIT_GLOBAL_TOKENS, 3000000)
+    globalTokens: n(env.LIMIT_GLOBAL_TOKENS, 3000000),
+    aiPerCode: n(env.LIMIT_AI_PER_CODE, 150),
+    aiGlobalMessages: n(env.LIMIT_AI_GLOBAL_MESSAGES, 3000),
+    aiGlobalTokens: n(env.LIMIT_AI_GLOBAL_TOKENS, 6000000)
   };
 }
 
@@ -72,7 +75,7 @@ function corsHeaders(env, origin) {
   if (origin && allowed.includes(origin)) {
     h['Access-Control-Allow-Origin'] = origin;
     h['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
-    h['Access-Control-Allow-Headers'] = 'Content-Type';
+    h['Access-Control-Allow-Headers'] = 'Content-Type, X-Glow-Code';
     h['Access-Control-Max-Age'] = '86400';
   }
   return { h, ok: !!h['Access-Control-Allow-Origin'] };
@@ -159,6 +162,88 @@ async function verifyTurnstile(env, deps, token, ip) {
   return d.success === true;
 }
 
+// ---------------------------------------------------------------- Glow AI
+// The app's built-in assistant for beta testers: the app sends a Gemini-style request with an invite code
+// (stored on the phone like an API key); this Worker adds the real key, so no key ever ships in the app.
+// Requests come from the Android app (no Origin header), so the invite code is the gate, not the origin.
+// Nothing is logged or stored; invite codes only appear in the counters as a salted per-day hash.
+const AI_MAX_BYTES = 3_000_000;         // room for one screenshot or space photo
+const AI_MAX_TURNS = 40;
+const AI_MAX_TEXT = 60000;              // per part: help questions carry a setup summary and a log
+const AI_MAX_OUTPUT = 4000;
+const IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
+
+export function aiCodes(env) {
+  return String(env.GLOW_AI_CODES || '').split(/[\s,]+/).map(s => s.trim()).filter(c => c.length >= 6);
+}
+async function codeOk(env, code) {
+  if (typeof code !== 'string' || code.length < 6 || code.length > 100) return false;
+  const want = await hmac(env.IP_SALT || 'glow', code.trim());
+  let ok = false;
+  for (const c of aiCodes(env)) if (sameBytes(await hmac(env.IP_SALT || 'glow', c), want)) ok = true;
+  return ok;
+}
+export async function codeKey(env, code, day) {
+  const d = new Uint8Array(await crypto.subtle.digest('SHA-256', enc.encode(`${env.IP_SALT}|ai|${day}|${code.trim()}`)));
+  return b64url(d.slice(0, 12));
+}
+
+// Keep only text and images from a Gemini-style request; no tools, no files, no URLs.
+export function cleanAiRequest(body) {
+  if (!body || typeof body !== 'object') return null;
+  const parts = list => (Array.isArray(list) ? list : []).map(p => {
+    if (typeof p?.text === 'string') return p.text ? { text: p.text.slice(0, AI_MAX_TEXT) } : null;
+    const img = p?.inline_data || p?.inlineData;
+    if (img && IMAGE_TYPES.has(img.mime_type || img.mimeType) && typeof img.data === 'string' && /^[A-Za-z0-9+/=]+$/.test(img.data.slice(0, 200)))
+      return { inline_data: { mime_type: img.mime_type || img.mimeType, data: img.data } };
+    return null;
+  }).filter(Boolean).slice(0, 4);
+  const contents = (Array.isArray(body.contents) ? body.contents : []).slice(-AI_MAX_TURNS)
+    .map(c => ({ role: c?.role === 'model' ? 'model' : 'user', parts: parts(c?.parts) })).filter(c => c.parts.length);
+  if (!contents.length || contents[contents.length - 1].role !== 'user') return null;
+  const sys = parts(body.systemInstruction?.parts).filter(p => p.text);
+  const asked = parseInt(body.generationConfig?.maxOutputTokens, 10);
+  const generationConfig = { maxOutputTokens: Math.min(AI_MAX_OUTPUT, asked > 0 ? asked : 1500) };
+  if (body.generationConfig?.responseMimeType === 'application/json') generationConfig.responseMimeType = 'application/json';
+  return { contents, systemInstruction: sys.length ? { parts: sys } : undefined, generationConfig };
+}
+
+const aiErr = (status, code, message, cors) => json({ error: { code, message } }, status, cors);
+
+async function handleAi(request, env, deps, cors, day) {
+  if (request.method !== 'POST') return aiErr(405, 'method', 'Use POST.', cors);
+  if (!env.GLOW_AI_KEY) return aiErr(503, 'off', 'Glow AI isn’t switched on yet.', cors);
+  const code = request.headers.get('X-Glow-Code') || '';
+  if (!(await codeOk(env, code))) return aiErr(401, 'code', 'That Glow AI invite code isn’t valid. Check it in Settings → AI assistant.', cors);
+  const len = parseInt(request.headers.get('Content-Length') || '0', 10);
+  if (len > AI_MAX_BYTES) return aiErr(413, 'too_big', 'That request is too large (try a smaller screenshot).', cors);
+  const raw = await request.text();
+  if (raw.length > AI_MAX_BYTES) return aiErr(413, 'too_big', 'That request is too large (try a smaller screenshot).', cors);
+  let req;
+  try { req = cleanAiRequest(JSON.parse(raw)); } catch { req = null; }
+  if (!req) return aiErr(400, 'bad_request', 'Glow AI couldn’t read that request.', cors);
+
+  const gate = await deps.limiter.takeAi({ day, codeKey: await codeKey(env, code, day), limits: limits(env) });
+  if (!gate.ok) return aiErr(403, 'limit', gate.reason === 'code'
+    ? 'You’ve used today’s Glow AI questions. They reset at 7 pm Eastern (midnight UTC).'
+    : 'Glow AI is resting for the day. It’s back at 7 pm Eastern (midnight UTC).', cors);
+
+  const model = env.AI_MODEL || env.MODEL;
+  if (env.AI_THINKING_LEVEL) req.generationConfig.thinkingConfig = { thinkingLevel: env.AI_THINKING_LEVEL };
+  const ask = () => deps.fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': env.GLOW_AI_KEY }, body: JSON.stringify(req)
+  });
+  let r = await ask();
+  if (r.status === 429 || r.status === 503) { await new Promise(res => setTimeout(res, deps.retryDelay ?? 1500)); r = await ask(); }
+  if (!r.ok) return aiErr(502, 'model', `Glow AI’s model is busy (${r.status}). Try again in a minute.`, cors);
+  const data = await r.json();
+  const tokens = data?.usageMetadata?.totalTokenCount || 0;
+  if (tokens) await deps.limiter.addAiTokens({ day, tokens });
+  // Only the answer text goes back (same shape as Gemini's, so the app reads it the same way).
+  const text = (data?.candidates?.[0]?.content?.parts || []).filter(p => !p.thought).map(p => p.text || '').join('');
+  return json({ candidates: [{ content: { parts: [{ text }] } }], remaining: gate.remaining }, 200, cors);
+}
+
 export async function handle(request, env, deps) {
   const url = new URL(request.url);
   const origin = request.headers.get('Origin');
@@ -167,6 +252,8 @@ export async function handle(request, env, deps) {
   const day = today(now);
 
   if (request.method === 'OPTIONS') return new Response(null, { status: originOk ? 204 : 403, headers: cors });
+  // Glow AI: the app has no Origin; a browser must still come from an allowed origin
+  if (url.pathname === '/ai' && (!origin || originOk)) return handleAi(request, env, deps, cors, day);
   if (!originOk) return json({ error: 'origin' }, 403, cors);
 
   if (url.pathname === '/status' && request.method === 'GET') {
