@@ -23,6 +23,9 @@
       '.gm-panel a:hover,.gm-panel a:focus-visible{background:#1d2232}' +
       'header{position:relative}' +
     '}' +
+    '@media (max-width:440px){' +
+      'header>a:first-child span[style*="margin-left"]{display:none}' +
+    '}' +
     '@media (prefers-reduced-motion:reduce){.gm-btn .gm-tri{transition:none}}';
   document.head.appendChild(css);
 
