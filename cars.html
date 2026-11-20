@@ -103,7 +103,7 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 
 <section id="music" style="max-width: 1180px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
 <div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 22px; background: radial-gradient(circle at 50% 38%, #1a2140 0%, #0b0d12 70%); border: 1px solid #1d2230; border-radius: 28px; padding: 36px 24px 28px">
-<svg role="img" aria-label="/Glow’s mirror ball, spinning faster as the music gets louder" viewBox="0 0 24 24" style="width: 220px; height: 220px; fill: none; stroke: {{ballColor}}; stroke-width: 1.15; stroke-linecap: round; filter: drop-shadow(0 0 {{glow}}px {{ballColor}}); overflow: visible">
+<svg role="img" aria-label="/Glow’s mirror ball, spinning faster as the music gets louder" viewBox="0 0 24 24" data-dc-style="width: 220px; height: 220px; fill: none; stroke: {{ballColor}}; stroke-width: 1.15; stroke-linecap: round; filter: drop-shadow(0 0 {{glow}}px {{ballColor}}); overflow: visible">
 <path d="M12 2.6v2.4"></path>
 <circle cx="12" cy="13" r="8"></circle>
 <path d="M4.6 10h14.8M4.2 13h15.6M4.6 16h14.8"></path>
@@ -111,9 +111,9 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 <path d="M20.5 2.5v3M19 4h3" stroke="#ffffff" stroke-width="1.4" data-dc-opacity="{{sparkOp}}" data-dc-transform="{{sparkT}}"></path>
 </svg>
 <div aria-hidden="true" style="width: 100%; max-width: 360px; display: flex; gap: 6px">
-<sc-for list="{{strip}}" as="cell" hint-placeholder-count="12"><div style="flex: 1; height: 10px; border-radius: 5px; background: {{cell.c}}; box-shadow: 0 0 {{cell.g}}px {{cell.c}}"></div></sc-for>
+<sc-for list="{{strip}}" as="cell" hint-placeholder-count="12"><div data-dc-style="flex: 1; height: 10px; border-radius: 5px; background: {{cell.c}}; box-shadow: 0 0 {{cell.g}}px {{cell.c}}"></div></sc-for>
 </div>
-<button type="button" data-on-click="{{toggle}}" style="font: inherit; font-weight: 600; cursor: pointer; background: {{btnBg}}; color: {{btnFg}}; border: 1px solid #3a4360; border-radius: 999px; padding: 12px 22px; display: inline-flex; align-items: center; gap: 8px">{{btnLabel}}</button>
+<button type="button" data-on-click="{{toggle}}" data-dc-style="font: inherit; font-weight: 600; cursor: pointer; background: {{btnBg}}; color: {{btnFg}}; border: 1px solid #3a4360; border-radius: 999px; padding: 12px 22px; display: inline-flex; align-items: center; gap: 8px">{{btnLabel}}</button>
 <p style="margin: 0; font-size: 13px; color: #8b93a7; text-align: center">{{caption}}</p>
 </div>
 <div style="flex: 1 1 480px; min-width: 0">

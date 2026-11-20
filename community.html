@@ -37,11 +37,11 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 
 <section aria-label="Filters" style="max-width: 1180px; margin: 0 auto; padding: 0 24px 22px; display: flex; flex-direction: column; gap: 14px">
 <div role="group" aria-label="Location type" style="display: flex; flex-wrap: wrap; gap: 8px">
-<sc-for list="{{locs}}" as="l" hint-placeholder-count="10"><button type="button" data-on-click="{{l.pick}}" aria-pressed="{{l.pressed}}" style="font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; min-height: 44px; padding: 9px 16px; border-radius: 999px; border: 1px solid {{l.border}}; background: {{l.bg}}; color: {{l.fg}}; display: inline-flex; align-items: center; gap: 8px">{{l.label}}<span style="font-size: 13px; font-weight: 600; opacity: 0.75">{{l.n}}</span></button></sc-for>
+<sc-for list="{{locs}}" as="l" hint-placeholder-count="10"><button type="button" data-on-click="{{l.pick}}" aria-pressed="{{l.pressed}}" data-dc-style="font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; min-height: 44px; padding: 9px 16px; border-radius: 999px; border: 1px solid {{l.border}}; background: {{l.bg}}; color: {{l.fg}}; display: inline-flex; align-items: center; gap: 8px">{{l.label}}<span style="font-size: 13px; font-weight: 600; opacity: 0.75">{{l.n}}</span></button></sc-for>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
 <div role="group" aria-label="Kind" style="display: flex; flex-wrap: wrap; gap: 6px; background: #12151c; border: 1px solid #222838; border-radius: 12px; padding: 4px">
-<sc-for list="{{kinds}}" as="k" hint-placeholder-count="4"><button type="button" data-on-click="{{k.pick}}" aria-pressed="{{k.pressed}}" style="font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; min-height: 40px; padding: 8px 14px; border-radius: 9px; border: 0; background: {{k.bg}}; color: {{k.fg}}">{{k.label}}</button></sc-for>
+<sc-for list="{{kinds}}" as="k" hint-placeholder-count="4"><button type="button" data-on-click="{{k.pick}}" aria-pressed="{{k.pressed}}" data-dc-style="font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; min-height: 40px; padding: 8px 14px; border-radius: 9px; border: 0; background: {{k.bg}}; color: {{k.fg}}">{{k.label}}</button></sc-for>
 </div>
 <p style="margin: 0; font-size: 14px; color: #8b93a7">{{countLine}}</p>
 </div>
@@ -52,7 +52,7 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px">
 <sc-for list="{{shown}}" as="it" hint-placeholder-count="9">
 <div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
-<p style="margin: 0; height: 56px; border-radius: 12px; background: {{it.bar}}; box-shadow: 0 10px 30px -12px {{it.glow}}"></p>
+<p data-dc-style="margin: 0; height: 56px; border-radius: 12px; background: {{it.bar}}; box-shadow: 0 10px 30px -12px {{it.glow}}"></p>
 <div style="display: flex; align-items: center; gap: 8px">
 <h2 style="margin: 0; font-size: 19px; font-weight: 700; color: #f2f4f8">{{it.name}}</h2>
 <sc-if value="{{it.pro}}" hint-placeholder-val="{{ false }}"><span title="Uses at least one Pro feature" style="font-size: 11px; font-weight: 700; letter-spacing: 0.6px; color: #0b0d12; background: #ffb03a; border-radius: 6px; padding: 2px 6px">PRO</span></sc-if>
