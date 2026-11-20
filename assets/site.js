@@ -10,8 +10,15 @@ window.GLOW_SITE = {
                       music: 'entry.1675183833', weekly: 'entry.1055466153', later: 'entry.1558123359', heard: 'entry.295920219' } },
   iphone: { action: 'https://docs.google.com/forms/d/e/1FAIpQLSda9Tr7MVfzAi8-secygXotVYRhbRutwRvuCdI3-MAUsNwslg/formResponse',
             fields: { email: 'entry.2017772158', car: 'entry.989577901', kit: 'entry.1012979735' } },
+  home:   { action: 'https://docs.google.com/forms/d/e/1FAIpQLSdDLaifOQYdX22TSP68Gu9bwEXi5tFeDNwtwFCxACHi2klYuQ/formResponse',
+            fields: { email: 'entry.1944140057', what: 'entry.884339454', lights: 'entry.437712196', phone: 'entry.2056392084', heard: 'entry.1278988845' } },
   // Community subreddit, e.g. 'https://www.reddit.com/r/slashglow'. Empty = the button stays hidden.
   reddit: ''
+};
+const DONE = {
+  beta: 'Thanks! Watch your inbox for the Google Play invite.',
+  iphone: 'Thanks! We’ll email you when /Glow for iPhone is ready to test.',
+  home: 'Thanks! We’ll email you when the home beta opens.'
 };
 document.addEventListener('DOMContentLoaded', () => {
   const S = window.GLOW_SITE;
@@ -33,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Google Forms accepts the post but doesn't let a page read its answer, so a sent request counts as done
         await fetch(cfg.action, { method: 'POST', mode: 'no-cors', body });
         f.reset(); btn.textContent = 'Sent ✓';
-        if(msg) msg.textContent = f.dataset.form === 'iphone' ? 'Thanks! We’ll email you when /Glow for iPhone is ready to test.' : 'Thanks! Watch your inbox for the Google Play invite.';
+        if(msg) msg.textContent = DONE[f.dataset.form] || DONE.beta;
       }catch(err){ btn.disabled = false; btn.textContent = label; if(msg) msg.textContent = 'Couldn’t send that. Check your connection and try again.'; }
     });
   }

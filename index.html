@@ -56,7 +56,7 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 <div style="max-width: 1180px; margin: 0 auto; padding: 80px 24px">
 <p style="margin: 0 0 10px; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #8ea6ff">Where it works</p>
 <h2 style="margin: 0 0 14px; font-family: Inter, sans-serif; font-size: clamp(30px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.8px; color: #f5f7fb; max-width: 760px">Anywhere there’s a strip and a controller.</h2>
-<p style="margin: 0 0 36px; color: #b7bfd1; max-width: 720px">Each place gets its own location in /Glow, with its own zones and looks. Switch at the top of the app; /Glow connects only to the lights you’re using.</p>
+<p style="margin: 0 0 36px; color: #b7bfd1; max-width: 720px">Each place gets its own location in /Glow, with its own zones and looks. Switch at the top of the app; /Glow connects only to the lights you’re using. The beta starts with cars; for home lights, <a href="#home" style="color: #8ea6ff">join the home waitlist</a>.</p>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px">
 <div style="background: #151922; border: 1px solid #222838; border-radius: 18px; padding: 22px">
 <p style="margin: 0 0 14px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #ffb060, #ff7a3d, #c890ff)"></p>
@@ -342,7 +342,23 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 <button type="submit" style="font: inherit; font-weight: 600; cursor: pointer; margin-top: 6px; background: #8ea6ff; color: #0b0d12; border: 0; border-radius: 12px; padding: 15px 20px">Request an invite</button>
 <p data-form-msg role="status" style="margin: 0; font-size: 15px; color: #b7bfd1"></p>
 </form>
-<form data-form="iphone" id="iphone" style="flex: 1 1 340px; min-width: 0; background: #151922; border: 1px solid #222838; border-radius: 22px; padding: 32px; display: flex; flex-direction: column; gap: 14px">
+<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+<form data-form="home" id="home" style="background: #151922; border: 1px solid #222838; border-radius: 22px; padding: 32px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-family: Inter, sans-serif; font-size: 28px; letter-spacing: -0.4px; color: #f5f7fb">Home lights: join the waitlist</h2>
+<p style="margin: 0; color: #b7bfd1">TV walls, desks, rooms and holiday lights are next. Leave your email and we’ll invite you when the home beta opens (Android first).</p>
+<label for="home-email" style="font-size: 14px; color: #b7bfd1">Email</label>
+<input id="home-email" name="email" required autocomplete="email" type="email" placeholder="you@example.com" style="font: inherit; color: #e9ecf3; background: #0f121a; border: 1px solid #2a3142; border-radius: 12px; padding: 14px 16px">
+<fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 14px"><legend style="font-size: 14px; color: #b7bfd1; margin-bottom: 8px">What would you light? (optional)</legend><label style="display: inline-flex; gap: 6px; align-items: center; color: #c3cada; font-size: 15px"><input type="checkbox" name="what" value="TV or media center"> TV or media center</label><label style="display: inline-flex; gap: 6px; align-items: center; color: #c3cada; font-size: 15px"><input type="checkbox" name="what" value="Desk or gaming setup"> Desk or gaming setup</label><label style="display: inline-flex; gap: 6px; align-items: center; color: #c3cada; font-size: 15px"><input type="checkbox" name="what" value="Room or ceiling"> Room or ceiling</label><label style="display: inline-flex; gap: 6px; align-items: center; color: #c3cada; font-size: 15px"><input type="checkbox" name="what" value="Holiday or outdoor lights"> Holiday or outdoor lights</label><label style="display: inline-flex; gap: 6px; align-items: center; color: #c3cada; font-size: 15px"><input type="checkbox" name="what" value="Something else"> Something else</label></fieldset>
+<label for="home-lights" style="font-size: 14px; color: #b7bfd1">Lights or kit you have now (optional)</label>
+<input id="home-lights" name="lights" type="text" placeholder="e.g. TV backlight, SP630E, LED LAMP app" style="font: inherit; color: #e9ecf3; background: #0f121a; border: 1px solid #2a3142; border-radius: 12px; padding: 14px 16px">
+<label for="home-phone" style="font-size: 14px; color: #b7bfd1">Phone (optional)</label>
+<input id="home-phone" name="phone" type="text" placeholder="e.g. Pixel 10 Pro XL, Galaxy S25" style="font: inherit; color: #e9ecf3; background: #0f121a; border: 1px solid #2a3142; border-radius: 12px; padding: 14px 16px">
+<label for="home-heard" style="font-size: 14px; color: #b7bfd1">How did you hear about /Glow? (optional)</label>
+<input id="home-heard" name="heard" type="text" placeholder="e.g. r/homeassistant" style="font: inherit; color: #e9ecf3; background: #0f121a; border: 1px solid #2a3142; border-radius: 12px; padding: 14px 16px">
+<button type="submit" style="font: inherit; font-weight: 600; cursor: pointer; margin-top: 6px; background: transparent; color: #e9ecf3; border: 1px solid #3a4360; border-radius: 12px; padding: 15px 20px">Join the waitlist</button>
+<p data-form-msg role="status" style="margin: 0; font-size: 15px; color: #b7bfd1"></p>
+</form>
+<form data-form="iphone" id="iphone" style="background: #151922; border: 1px solid #222838; border-radius: 22px; padding: 32px; display: flex; flex-direction: column; gap: 14px">
 <h2 style="margin: 0; font-family: Inter, sans-serif; font-size: 28px; letter-spacing: -0.4px; color: #f5f7fb">iPhone: coming soon</h2>
 <p style="margin: 0; color: #b7bfd1">Leave your email and we’ll let you know when /Glow for iPhone is ready to test.</p>
 <label for="ios-email" style="font-size: 14px; color: #b7bfd1">Email</label>
@@ -354,6 +370,7 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 <button type="submit" style="font: inherit; font-weight: 600; cursor: pointer; margin-top: 6px; background: transparent; color: #e9ecf3; border: 1px solid #3a4360; border-radius: 12px; padding: 15px 20px">Notify me</button>
 <p data-form-msg role="status" style="margin: 0; font-size: 15px; color: #b7bfd1"></p>
 </form>
+</div>
 </section>
 
 <footer style="border-top: 1px solid #1d2230">
@@ -364,7 +381,7 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 </footer>
 </div>
 </div>
-<script src="assets/site.js?v=3"></script>
+<script src="assets/site.js?v=4"></script>
 <script src="assets/dc-lite.js"></script>
 <script src="assets/main.js"></script>
 <script src="assets/menu.js?v=2" defer></script>
