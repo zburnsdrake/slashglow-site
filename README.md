@@ -11,8 +11,8 @@ The /Glow: Light Studio website, served by GitHub Pages from this repo (plain HT
 | `privacy.html` | Privacy policy (linked from Google Play) |
 
 - **Settings:** `assets/site.js` holds the sign-up form links and the subreddit link.
-- **Planner:** `plan.html` reads `data-worker`, `data-sitekey` and `data-amazon-tag` from its `<body>`. Until `data-worker` is set it shows an example plan with the chat closed. The Worker is in `worker/` (see its README); its tests run with `node worker/test/test.mjs`.
-- **Parts list and planner rules:** `catalog.json` (the gear /Glow has tested) and `planner.json` (how the planner asks, plans and stays safe) are shared with the app. Edit them here, then run `scripts/sync-app.sh ../glow-lights`; the Worker tests fail if the app's copies differ.
+- **Planner:** `plan.html` reads `data-worker`, `data-sitekey` and `data-amazon-tag` from its `<body>`. Until `data-worker` is set it shows an example plan with the chat closed. The Worker lives in the private repo zburnsdrake/slashglow-planner (planner chat and Glow AI), which deploys it through Cloudflare Workers Builds.
+- **Parts list and planner questions:** `catalog.json` (the gear /Glow has tested) and `planner.json` (only the planner's "About this space" questions) are copies. The source is the private planner repo, which also keeps the planner's rules: edit there, then run its `scripts/sync.sh ../slashglow-site ../glow-lights`. Don't edit them here.
 - **Interactive bits** (the demo beat, the community filters) run on `assets/dc-lite.js` plus one script per page.
 
 ## Plans to the app (link and QR)
