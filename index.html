@@ -54,16 +54,26 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 
 <section id="music" style="background: #10131a; border-top: 1px solid #1d2230; border-bottom: 1px solid #1d2230">
 <div style="max-width: 1180px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
-<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 22px; background: radial-gradient(circle at 50% 38%, #1a2140 0%, #0b0d12 70%); border: 1px solid #1d2230; border-radius: 28px; padding: 36px 24px 28px">
-<svg role="img" aria-label="/Glow’s mirror ball, spinning faster as the music gets louder" viewBox="0 0 24 24" data-dc-style="width: 220px; height: 220px; fill: none; stroke: {{ballColor}}; stroke-width: 1.15; stroke-linecap: round; filter: drop-shadow(0 0 {{glow}}px {{ballColor}}); overflow: visible">
-<path d="M12 2.6v2.4"></path>
-<circle cx="12" cy="13" r="8"></circle>
-<path d="M4.6 10h14.8M4.2 13h15.6M4.6 16h14.8"></path>
-<sc-for list="{{meridians}}" as="m" hint-placeholder-count="4"><path data-dc-d="{{m.d}}" data-dc-opacity="{{m.op}}"></path></sc-for>
-<path d="M20.5 2.5v3M19 4h3" stroke="#ffffff" stroke-width="1.4" data-dc-opacity="{{sparkOp}}" data-dc-transform="{{sparkT}}"></path>
-</svg>
-<div aria-hidden="true" style="width: 100%; max-width: 360px; display: flex; gap: 6px">
-<sc-for list="{{strip}}" as="cell" hint-placeholder-count="12"><div data-dc-style="flex: 1; height: 10px; border-radius: 5px; background: {{cell.c}}; box-shadow: 0 0 {{cell.g}}px {{cell.c}}"></div></sc-for>
+<div id="clips" data-clips="home" hidden style="flex: 1 1 100%; min-width: 0"></div>
+<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 22px; background: radial-gradient(circle at 50% 38%, #1a2140 0%, #0b0d12 70%); border: 1px solid #1d2230; border-radius: 28px; padding: 24px 20px 24px">
+<div id="glowScene" role="img" aria-label="A dark living room wall: the TV backlight, a ceiling cove light and two speaker uplights moving with the music" style="position: relative; width: 100%; max-width: 512px; aspect-ratio: 512 / 340">
+<div data-dc-style="{{sceneT}}">
+<div style="position: absolute; inset: 0; border-radius: 18px; overflow: hidden; background: linear-gradient(180deg, #10121a 0%, #0b0c11 70%, #07080b 100%); border: 1px solid #1a1e2a">
+<div data-dc-style="{{coveGlow}}"></div>
+<div data-dc-style="{{coveLine}}"></div>
+<div data-dc-style="{{tvGlow}}"></div>
+<div style="position: absolute; left: 50%; top: 74px; width: 232px; height: 132px; transform: translateX(-50%); background: linear-gradient(160deg, #0b0d13 0%, #040507 55%); border: 1px solid #1c2130; border-radius: 5px"></div>
+<div style="position: absolute; left: 50%; top: 236px; width: 300px; height: 24px; transform: translateX(-50%); background: #0c0e14; border: 1px solid #1a1e2a; border-radius: 3px"></div>
+<div data-dc-style="{{upL}}"></div>
+<div data-dc-style="{{upR}}"></div>
+<div style="position: absolute; left: 34px; top: 168px; width: 44px; height: 150px; background: #08090d; border: 1px solid #1a1e29; border-radius: 6px; display: flex; flex-direction: column; align-items: center; gap: 14px; padding-top: 18px; box-sizing: border-box"><div style="width: 16px; height: 16px; border-radius: 50%; border: 1px solid #1f2431"></div><div style="width: 28px; height: 28px; border-radius: 50%; border: 1px solid #1f2431"></div><div style="width: 28px; height: 28px; border-radius: 50%; border: 1px solid #1f2431"></div></div>
+<div style="position: absolute; right: 34px; top: 168px; width: 44px; height: 150px; background: #08090d; border: 1px solid #1a1e29; border-radius: 6px; display: flex; flex-direction: column; align-items: center; gap: 14px; padding-top: 18px; box-sizing: border-box"><div style="width: 16px; height: 16px; border-radius: 50%; border: 1px solid #1f2431"></div><div style="width: 28px; height: 28px; border-radius: 50%; border: 1px solid #1f2431"></div><div style="width: 28px; height: 28px; border-radius: 50%; border: 1px solid #1f2431"></div></div>
+<div data-dc-style="{{floor}}"></div>
+<p style="position: absolute; left: 14px; top: 12px; margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: #8b93a7">Cove</p>
+<p style="position: absolute; left: 50%; top: 212px; transform: translateX(-50%); margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: #8b93a7; white-space: nowrap">TV backlight</p>
+<p style="position: absolute; left: 14px; top: 140px; margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: #8b93a7">Uplights</p>
+</div>
+</div>
 </div>
 <button type="button" data-on-click="{{toggle}}" data-dc-style="font: inherit; font-weight: 600; cursor: pointer; background: {{btnBg}}; color: {{btnFg}}; border: 1px solid #3a4360; border-radius: 999px; padding: 12px 22px; display: inline-flex; align-items: center; gap: 8px">{{btnLabel}}</button>
 <p style="margin: 0; font-size: 13px; color: #8b93a7; text-align: center">{{caption}}</p>
@@ -388,7 +398,9 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 </div>
 <script src="assets/site.js?v=4"></script>
 <script src="assets/dc-lite.js"></script>
-<script src="assets/main.js"></script>
+<script src="assets/scene.js?v=1"></script>
+<script src="assets/main.js?v=2"></script>
+<script src="assets/clips.js?v=1"></script>
 <script src="assets/menu.js?v=2" defer></script>
 </body>
 </html>
