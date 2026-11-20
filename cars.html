@@ -104,7 +104,7 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 
 <section id="music" style="max-width: 1180px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
 <div id="clips" data-clips="cars" hidden style="flex: 1 1 100%; min-width: 0"></div>
-<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 22px; background: radial-gradient(circle at 50% 38%, #1a2140 0%, #0b0d12 70%); border: 1px solid #1d2230; border-radius: 28px; padding: 24px 20px 24px">
+<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 18px; background: radial-gradient(circle at 50% 38%, #1a2140 0%, #0b0d12 70%); border: 1px solid #1d2230; border-radius: 28px; padding: 24px 20px 24px">
 <div id="glowScene" role="img" aria-label="A mirror ball turning faster as the music gets louder, throwing flecks of light across a dark room" style="position: relative; width: 100%; max-width: 512px; aspect-ratio: 512 / 340">
 <div data-dc-style="{{sceneT}}">
 <div style="position: absolute; inset: 0; border-radius: 18px; overflow: hidden; background: radial-gradient(ellipse 80% 70% at 50% 40%, #121626 0%, #0a0b10 75%); border: 1px solid #1a1e2a">
@@ -121,8 +121,32 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 </div>
 </div>
 </div>
-<button type="button" data-on-click="{{toggle}}" data-dc-style="font: inherit; font-weight: 600; cursor: pointer; background: {{btnBg}}; color: {{btnFg}}; border: 1px solid #3a4360; border-radius: 999px; padding: 12px 22px; display: inline-flex; align-items: center; gap: 8px">{{btnLabel}}</button>
-<p style="margin: 0; font-size: 13px; color: #8b93a7; text-align: center">{{caption}}</p>
+<div style="width: 100%; max-width: 512px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+<button type="button" data-on-click="{{toggleSound}}" data-dc-aria-pressed="{{soundOn}}" data-dc-style="{{soundStyle}}"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" style="fill: currentColor"><path data-dc-d="{{soundIcon}}"></path></svg>{{soundLabel}}</button>
+<p style="margin: 0; flex: 1 1 200px; font-size: 13px; color: #8b93a7">{{caption}}</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px 10px 12px; border-radius: 14px; background: #151922; border: 1px solid #222838; border-top: 3px solid #ff4f6d; min-width: 0">
+<div style="display: flex; justify-content: space-between; align-items: center; width: 100%"><span style="font-weight: 700; font-size: 14px; color: #f2f4f8">Fuzz</span><span data-dc-style="{{fuzzLed}}"></span></div>
+<button type="button" aria-label="Fuzz footswitch" data-dc-aria-pressed="{{fuzzOn}}" data-on-click="{{fuzzStomp}}" data-dc-style="{{fuzzSw}}"></button>
+<label for="ped-fuzz" style="font-size: 12px; font-weight: 600; color: #b7bfd1">Gain</label>
+<input id="ped-fuzz" type="range" min="0" max="100" value="60" data-on-input="{{fuzzSet}}" style="width: 100%; accent-color: #ff4f6d">
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px 10px 12px; border-radius: 14px; background: #151922; border: 1px solid #222838; border-top: 3px solid #3ad07a; min-width: 0">
+<div style="display: flex; justify-content: space-between; align-items: center; width: 100%"><span style="font-weight: 700; font-size: 14px; color: #f2f4f8">Rotary</span><span data-dc-style="{{rotLed}}"></span></div>
+<button type="button" aria-label="Rotary footswitch" data-dc-aria-pressed="{{rotOn}}" data-on-click="{{rotStomp}}" data-dc-style="{{rotSw}}"></button>
+<label for="ped-rot" style="font-size: 12px; font-weight: 600; color: #b7bfd1">Speed</label>
+<input id="ped-rot" type="range" min="0" max="100" value="50" data-on-input="{{rotSet}}" style="width: 100%; accent-color: #3ad07a">
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px 10px 12px; border-radius: 14px; background: #151922; border: 1px solid #222838; border-top: 3px solid #1fb8a8; min-width: 0">
+<div style="display: flex; justify-content: space-between; align-items: center; width: 100%"><span style="font-weight: 700; font-size: 14px; color: #f2f4f8">Echo</span><span data-dc-style="{{echoLed}}"></span></div>
+<button type="button" aria-label="Echo footswitch" data-dc-aria-pressed="{{echoOn}}" data-on-click="{{echoStomp}}" data-dc-style="{{echoSw}}"></button>
+<label for="ped-echo" style="font-size: 12px; font-weight: 600; color: #b7bfd1">Repeats</label>
+<input id="ped-echo" type="range" min="0" max="100" value="55" data-on-input="{{echoSet}}" style="width: 100%; accent-color: #1fb8a8">
+</div>
+</div>
+</div>
 </div>
 <div style="flex: 1 1 480px; min-width: 0">
 <p style="margin: 0 0 10px; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #8ea6ff">Music mode</p>
@@ -266,8 +290,8 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 </div>
 <script src="assets/site.js?v=4"></script>
 <script src="assets/dc-lite.js"></script>
-<script src="assets/scene.js?v=1"></script>
-<script src="assets/cars.js?v=2"></script>
+<script src="assets/scene.js?v=2"></script>
+<script src="assets/cars.js?v=3"></script>
 <script src="assets/clips.js?v=1"></script>
 <script src="assets/menu.js?v=2" defer></script>
 </body>
