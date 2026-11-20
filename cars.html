@@ -127,23 +127,23 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 <p style="margin: 0; flex: 1 1 200px; font-size: 13px; color: #8b93a7">{{caption}}</p>
 </div>
 <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
-<div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px 10px 12px; border-radius: 14px; background: #151922; border: 1px solid #222838; border-top: 3px solid #ff4f6d; min-width: 0">
-<div style="display: flex; justify-content: space-between; align-items: center; width: 100%"><span style="font-weight: 700; font-size: 14px; color: #f2f4f8">Fuzz</span><span data-dc-style="{{fuzzLed}}"></span></div>
-<button type="button" aria-label="Fuzz footswitch" data-dc-aria-pressed="{{fuzzOn}}" data-on-click="{{fuzzStomp}}" data-dc-style="{{fuzzSw}}"></button>
-<label for="ped-fuzz" style="font-size: 12px; font-weight: 600; color: #b7bfd1">Gain</label>
-<input id="ped-fuzz" type="range" min="0" max="100" value="60" data-on-input="{{fuzzSet}}" style="width: 100%; accent-color: #ff4f6d">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px 10px 12px; border-radius: 14px; background: #151922; border: 1px solid #222838; border-top: 3px solid #ffcf3a; min-width: 0">
+<div style="display: flex; justify-content: space-between; align-items: center; width: 100%"><span style="font-weight: 700; font-size: 14px; color: #f2f4f8">Drive</span><span data-dc-style="{{driveLed}}"></span></div>
+<button type="button" aria-label="Drive footswitch" data-dc-aria-pressed="{{driveOn}}" data-on-click="{{driveStomp}}" data-dc-style="{{driveSw}}"></button>
+<label for="ped-drive" style="font-size: 12px; font-weight: 600; color: #b7bfd1">Gain</label>
+<input id="ped-drive" type="range" min="0" max="100" value="50" data-on-input="{{driveSet}}" style="width: 100%; accent-color: #ffcf3a">
 </div>
 <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px 10px 12px; border-radius: 14px; background: #151922; border: 1px solid #222838; border-top: 3px solid #3ad07a; min-width: 0">
-<div style="display: flex; justify-content: space-between; align-items: center; width: 100%"><span style="font-weight: 700; font-size: 14px; color: #f2f4f8">Rotary</span><span data-dc-style="{{rotLed}}"></span></div>
-<button type="button" aria-label="Rotary footswitch" data-dc-aria-pressed="{{rotOn}}" data-on-click="{{rotStomp}}" data-dc-style="{{rotSw}}"></button>
-<label for="ped-rot" style="font-size: 12px; font-weight: 600; color: #b7bfd1">Speed</label>
-<input id="ped-rot" type="range" min="0" max="100" value="50" data-on-input="{{rotSet}}" style="width: 100%; accent-color: #3ad07a">
+<div style="display: flex; justify-content: space-between; align-items: center; width: 100%"><span style="font-weight: 700; font-size: 14px; color: #f2f4f8">Phaser</span><span data-dc-style="{{phaserLed}}"></span></div>
+<button type="button" aria-label="Phaser footswitch" data-dc-aria-pressed="{{phaserOn}}" data-on-click="{{phaserStomp}}" data-dc-style="{{phaserSw}}"></button>
+<label for="ped-phaser" style="font-size: 12px; font-weight: 600; color: #b7bfd1">Depth</label>
+<input id="ped-phaser" type="range" min="0" max="100" value="60" data-on-input="{{phaserSet}}" style="width: 100%; accent-color: #3ad07a">
 </div>
 <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px 10px 12px; border-radius: 14px; background: #151922; border: 1px solid #222838; border-top: 3px solid #1fb8a8; min-width: 0">
 <div style="display: flex; justify-content: space-between; align-items: center; width: 100%"><span style="font-weight: 700; font-size: 14px; color: #f2f4f8">Echo</span><span data-dc-style="{{echoLed}}"></span></div>
 <button type="button" aria-label="Echo footswitch" data-dc-aria-pressed="{{echoOn}}" data-on-click="{{echoStomp}}" data-dc-style="{{echoSw}}"></button>
-<label for="ped-echo" style="font-size: 12px; font-weight: 600; color: #b7bfd1">Repeats</label>
-<input id="ped-echo" type="range" min="0" max="100" value="55" data-on-input="{{echoSet}}" style="width: 100%; accent-color: #1fb8a8">
+<label for="ped-echo" style="font-size: 12px; font-weight: 600; color: #b7bfd1">Mix</label>
+<input id="ped-echo" type="range" min="0" max="100" value="60" data-on-input="{{echoSet}}" style="width: 100%; accent-color: #1fb8a8">
 </div>
 </div>
 </div>
@@ -290,7 +290,7 @@ a{color:#8ea6ff}a:hover{color:#b8c6ff}
 </div>
 <script src="assets/site.js?v=4"></script>
 <script src="assets/dc-lite.js"></script>
-<script src="assets/scene.js?v=2"></script>
+<script src="assets/scene.js?v=3"></script>
 <script src="assets/cars.js?v=3"></script>
 <script src="assets/clips.js?v=1"></script>
 <script src="assets/menu.js?v=2" defer></script>
