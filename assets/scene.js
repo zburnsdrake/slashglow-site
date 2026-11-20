@@ -70,14 +70,12 @@ common(){
   const set = key => e => { this.fx[key] = +e.target.value / 100; };
   const led = (on, c) => `width: 10px; height: 10px; border-radius: 50%; background: ${on ? c : '#2a3142'}; box-shadow: ${on ? `0 0 10px ${c}` : 'none'}`;
   const sw = on => `width: 46px; height: 46px; border-radius: 50%; cursor: pointer; border: 2px solid ${on ? '#e9ecf3' : '#8b93a7'}; background: radial-gradient(circle at 35% 30%, #f4f6fa, #8b93a7 75%); box-shadow: ${on ? '0 1px 0 #3a4360' : '0 4px 0 #3a4360'}; transform: translateY(${on ? 3 : 0}px)`;
-  const any = S.drive || S.phaser || S.echo;
   return {
     sceneT: `position: absolute; left: 0; top: 0; width: 512px; height: 340px; transform-origin: 0 0; transform: scale(${this.scale.toFixed(4)})`,
     soundLabel: sound ? 'Sound on' : 'Sound off', soundOn: String(sound),
     soundIcon: sound ? 'M3 9v6h4l5 4V5L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z' : 'M3 9v6h4l5 4V5L7 9H3zm13.6 0l-1.4 1.4L16.8 12l-1.6 1.6 1.4 1.4 1.6-1.6 1.6 1.6 1.4-1.4-1.6-1.6 1.6-1.6-1.4-1.4-1.6 1.6z',
     soundStyle: `font: inherit; font-weight: 600; font-size: 15px; cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; gap: 8px; padding: 0 16px; border-radius: 999px; border: 1px solid #3a4360; background: ${sound ? '#8ea6ff' : '#151922'}; color: ${sound ? '#0b0d12' : '#e9ecf3'}`,
     toggleSound: () => { if(this.state.sound){ this.stopAudio(); this.setState({ sound: false }); } else { this.startAudio(); this.setState({ sound: true }); } },
-    caption: any ? 'Try the sliders. The lights change the moment you do.' : 'The beat is playing silently. Stomp a pedal to change the lights, or turn the sound on.',
     driveOn: String(S.drive), phaserOn: String(S.phaser), echoOn: String(S.echo),
     driveLed: led(S.drive, '#ffcf3a'), phaserLed: led(S.phaser, '#3ad07a'), echoLed: led(S.echo, '#1fb8a8'),
     driveSw: sw(S.drive), phaserSw: sw(S.phaser), echoSw: sw(S.echo),
