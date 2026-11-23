@@ -112,7 +112,7 @@
       "name": "Trim removal tool kit with fish rod",
       "kind": "tool",
       "places": ["car"],
-      "status": "testing",
+      "status": "tested",
       "summary": "Plastic pry tools for panels and clips, plus a stiff fish rod for pulling wire through door boots.",
       "amazon": null,
       "store": null
@@ -122,7 +122,7 @@
       "name": "Inflatable air wedges",
       "kind": "tool",
       "places": ["car"],
-      "status": "testing",
+      "status": "tested",
       "summary": "Open a gap behind a door card or panel gently, so clips aren't snapped.",
       "amazon": null,
       "store": null
@@ -132,7 +132,7 @@
       "name": "Panel clip pliers",
       "kind": "tool",
       "places": ["car"],
-      "status": "testing",
+      "status": "tested",
       "summary": "Lift door clips and grommets straight out of the metal with little paint contact.",
       "amazon": null,
       "store": null
@@ -142,7 +142,7 @@
       "name": "Model 3/Y door panel clips (spares)",
       "kind": "tool",
       "places": ["car"],
-      "status": "testing",
+      "status": "tested",
       "summary": "Door clips are meant to be replaced when a panel comes off; have spares before you start.",
       "amazon": null,
       "store": null
@@ -152,7 +152,7 @@
       "name": "SMSL PS100 DAC (HDMI ARC)",
       "kind": "sound",
       "places": ["tv"],
-      "status": "testing",
+      "status": "tested",
       "summary": "Takes the TV's ARC audio so the TV remote sets the volume; feeds a small amp. Not controlled by /Glow.",
       "amazon": null,
       "store": null
@@ -162,7 +162,7 @@
       "name": "Fosi Audio V3 stereo amplifier",
       "kind": "sound",
       "places": ["tv", "desk"],
-      "status": "testing",
+      "status": "tested",
       "summary": "Compact amp for passive bookshelf speakers. Not controlled by /Glow.",
       "amazon": null,
       "store": null
@@ -172,7 +172,7 @@
       "name": "Wharfedale passive bookshelf speakers",
       "kind": "sound",
       "places": ["tv", "desk"],
-      "status": "testing",
+      "status": "tested",
       "summary": "Passive speakers for the DAC and amp chain; leave room off the back wall. Not controlled by /Glow.",
       "amazon": null,
       "store": null
