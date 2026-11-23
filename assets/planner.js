@@ -118,7 +118,7 @@
       box.appendChild(el('p', 'label sub', 'Zones in /Glow'));
       const ul = el('ul'); plan.zones.forEach(x => ul.appendChild(el('li', null, x))); box.appendChild(ul);
     }
-    if (plan.budget) box.appendChild(el('p', 'budget', `Rough budget (our estimate): ${plan.budget}`));
+    if (plan.budget) box.appendChild(el('p', 'budget', `Rough budget (our estimate): ${plan.budget.replace(/^\s*(rough\s+)?(budget|estimate)\s*(\(our estimate\))?\s*[:\-–]\s*/i, '')}`));
     planActions(box, plan);
     log.appendChild(box); scroll();
   }
