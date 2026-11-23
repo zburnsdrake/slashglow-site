@@ -179,7 +179,7 @@
     }
   ],
   "checklists": {
-    "controller": ["Found and connected in /Glow", "On/off, color and brightness respond", "Every look in Patterns plays", "Music mode follows the beat", "Stays connected for 30 minutes", "Reconnects after the power is cut and restored", "Keeps running with the phone screen off"],
+    "controller": ["Found and connected in /Glow", "On/off, color and brightness respond", "Every look in Dynamics → Looks plays", "Music mode follows the beat", "Stays connected for 30 minutes", "Reconnects after the power is cut and restored", "Keeps running with the phone screen off"],
     "kit": ["Installed following the /Glow guide or the kit's own steps", "Every zone responds in /Glow", "Lights wake with the car or phone as set up", "No rattles or loose panels after a week of driving"],
     "strip": ["Every pixel lights, in the right color order", "Full white for 10 minutes without the far end dimming or yellowing", "No flicker during music mode"],
     "power": ["Runs its zone at full white for 30 minutes", "Warm, not hot, with air around it"],
