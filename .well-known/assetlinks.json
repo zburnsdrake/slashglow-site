@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.orxstrategy.glow",
+      "sha256_cert_fingerprints": [
+        "FB:4B:C5:C1:76:3C:F1:E6:56:0E:D2:36:A3:A6:C0:7C:4E:8A:5A:A6:FE:4C:79:E5:B7:0D:EB:1D:C2:1D:F7:38",
+        "B8:D0:BE:70:EB:AC:81:3C:6D:61:10:6D:BE:E7:A4:EE:CA:B4:FC:4D:41:2E:C6:81:2C:B3:38:7F:05:07:DA:59"
+      ]
+    }
+  }
+]
